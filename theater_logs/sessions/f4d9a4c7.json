@@ -1,0 +1,19 @@
+{
+  "session_id": "f4d9a4c7",
+  "session_name": "Theater_Session_20250715_192619",
+  "start_time": "2025-07-15T19:26:19.969798",
+  "personas_generated": [
+    "The International Space Station Committee for Ground Reality Control (Crisis Management Department) [Ref-265-C]",
+    "The Orbital Surveillance Department (Prague Data Manipulation Division) (Strategic Implementation Unit) [Ref-940-D]",
+    "The Orbital Surveillance Department (Prague Data Manipulation Division) (Special Operations Division) [Ref-401-D]"
+  ],
+  "interactions": [],
+  "image_used": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L2A_NDWI.jpg",
+  "generation_settings": {
+    "max_actors": 3,
+    "generation_type": "conspiracy_theater"
+  },
+  "status": "active",
+  "persona_count": 3,
+  "last_updated": "2025-07-15T19:26:19.995202"
+}

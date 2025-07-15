@@ -1,0 +1,19 @@
+{
+  "session_id": "a92ff848",
+  "session_name": "Theater_Session_20250715_184529",
+  "start_time": "2025-07-15T18:45:29.733656",
+  "personas_generated": [
+    "The Satellite Manipulation Network",
+    "Sentinel-2 Puppet Master",
+    "Sentinel-2 Puppet Master"
+  ],
+  "interactions": [],
+  "image_used": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L2A_Moisture_index.jpg",
+  "generation_settings": {
+    "max_actors": 3,
+    "generation_type": "conspiracy_theater"
+  },
+  "status": "active",
+  "persona_count": 3,
+  "last_updated": "2025-07-15T18:45:29.783897"
+}

@@ -1,0 +1,19 @@
+{
+  "session_id": "6d643de1",
+  "session_name": "Theater_Session_20250715_185640",
+  "start_time": "2025-07-15T18:56:40.092039",
+  "personas_generated": [
+    "The Orbital Surveillance Syndicate",
+    "The Satellite Manipulation Network",
+    "The Satellite Manipulation Network"
+  ],
+  "interactions": [],
+  "image_used": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L1C_NDVI.jpg",
+  "generation_settings": {
+    "max_actors": 3,
+    "generation_type": "conspiracy_theater"
+  },
+  "status": "active",
+  "persona_count": 3,
+  "last_updated": "2025-07-15T18:56:40.145636"
+}

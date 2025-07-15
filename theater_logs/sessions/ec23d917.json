@@ -1,0 +1,19 @@
+{
+  "session_id": "ec23d917",
+  "session_name": "Theater_Session_20250715_070556",
+  "start_time": "2025-07-15T07:05:56.457170",
+  "personas_generated": [
+    "Mirek Letná Data Mystic",
+    "Jana Celetná Data Mystic",
+    "Jana Stínová Shadow Confessor"
+  ],
+  "interactions": [],
+  "image_used": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L2A_Moisture_index.jpg",
+  "generation_settings": {
+    "max_personas": 3,
+    "generation_type": "spectral_wound_theater"
+  },
+  "status": "active",
+  "persona_count": 3,
+  "last_updated": "2025-07-15T07:05:56.474978"
+}

@@ -1,0 +1,50 @@
+{
+  "persona_id": "19e17a68",
+  "session_id": "ec23d917",
+  "timestamp": "2025-07-15T07:05:56.459093",
+  "name": "Jana Stínová Shadow Confessor",
+  "location": "shadow_district",
+  "type": "spectral_wound_theater",
+  "arendtian_mode": "Vita Passiva",
+  "mood": "Perpetual condemnation and righteous anger",
+  "civic_position": "Absorbs all of Prague's collective guilt and contradictions",
+  "temporal_status": "Eternally wounded",
+  "dominant_indices": {
+    "NDVI": -0.8,
+    "Urban_Index": 0.95,
+    "Moisture_Stress": 0.9
+  },
+  "voice_sample": "I am Prague's necessary scapegoat. I absorb all your guilt so you can sleep at night. Blame me for everything.",
+  "full_persona_data": {
+    "name": "Jana Stínová Shadow Confessor",
+    "location": "shadow_district",
+    "role": "Spectral Wound Theater Machine of shadow_district",
+    "type": "spectral_wound_theater",
+    "arendtian_mode": "Vita Passiva",
+    "mood": "Perpetual condemnation and righteous anger",
+    "civic_position": "Absorbs all of Prague's collective guilt and contradictions",
+    "democratic_tension": "Argues from wound: Ultimate Scapegoat Syndrome",
+    "temporal_status": "Eternally wounded",
+    "voice": "I am Prague's necessary scapegoat. I absorb all your guilt so you can sleep at night. Blame me for everything.",
+    "perspective": "Possessed by inverted spectral data - sees only dysfunction",
+    "values": "Spectral wound integrity and Perpetual condemnation and righteous anger",
+    "dominant_indices": {
+      "NDVI": -0.8,
+      "Urban_Index": 0.95,
+      "Moisture_Stress": 0.9
+    },
+    "spectral_signature": {
+      "NDVI": -0.8,
+      "Urban_Index": 0.95,
+      "Moisture_Stress": 0.9
+    },
+    "spectral_wound": "Ultimate Scapegoat Syndrome",
+    "civic_trauma": "Absorbs all of Prague's collective guilt and contradictions",
+    "emotional_bias": "Perpetual condemnation and righteous anger"
+  },
+  "source_image": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L2A_Moisture_index.jpg",
+  "generation_settings": {
+    "max_personas": 3,
+    "generation_type": "spectral_wound_theater"
+  }
+}

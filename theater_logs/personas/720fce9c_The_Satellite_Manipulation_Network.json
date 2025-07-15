@@ -1,0 +1,47 @@
+{
+  "persona_id": "720fce9c",
+  "session_id": "6d643de1",
+  "timestamp": "2025-07-15T18:56:40.096625",
+  "name": "The Satellite Manipulation Network",
+  "location": "orbital_space",
+  "type": "non_human_actor",
+  "arendtian_mode": "Anti-Consensus",
+  "mood": "Absolutely Convinced",
+  "civic_position": "Total information surveillance and control",
+  "temporal_status": "Eternally Suspicious",
+  "dominant_indices": {},
+  "voice_sample": "Your \"objective data\" is my propaganda!",
+  "full_persona_data": {
+    "name": "The Satellite Manipulation Network",
+    "location": "orbital_space",
+    "role": "Non-Human Actor of orbital_space",
+    "type": "non_human_actor",
+    "actor_category": "satellite_agency",
+    "agenda": "Total information surveillance and control",
+    "voice_style": "orbital_authority",
+    "impossible_demands": [
+      "Total control over all satellite data",
+      "Elimination of ground-based observation",
+      "Orbital surveillance of all human activity",
+      "Space-based governance of Earth"
+    ],
+    "conspiracy_evidence": "Satellite data stream manipulation and reality distortion confirmed",
+    "refuses_negotiation": true,
+    "escalation_tendency": "extreme",
+    "threat_level": "reality_control",
+    "manifestation_quote": "Your \"objective data\" is my propaganda!",
+    "perspective": "Conspiracy Evidence: Satellite data stream manipulation and reality distortion confirmed",
+    "values": "Territorial control and Total information surveillance and control",
+    "arendtian_mode": "Anti-Consensus",
+    "mood": "Absolutely Convinced",
+    "civic_position": "Total information surveillance and control",
+    "democratic_tension": "Refuses all rational discussion",
+    "temporal_status": "Eternally Suspicious",
+    "voice": "Your \"objective data\" is my propaganda!"
+  },
+  "source_image": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L1C_NDVI.jpg",
+  "generation_settings": {
+    "max_actors": 3,
+    "generation_type": "conspiracy_theater"
+  }
+}

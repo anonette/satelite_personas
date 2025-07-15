@@ -1,0 +1,47 @@
+{
+  "persona_id": "6979dc25",
+  "session_id": "f4d9a4c7",
+  "timestamp": "2025-07-15T19:26:19.971798",
+  "name": "The Orbital Surveillance Department (Prague Data Manipulation Division) (Special Operations Division) [Ref-401-D]",
+  "location": "orbital_space",
+  "type": "non_human_actor",
+  "arendtian_mode": "Anti-Consensus",
+  "mood": "Absolutely Convinced",
+  "civic_position": "Complete terrestrial observation suppression via space-based gaslighting operations per Protocol 12-S",
+  "temporal_status": "Eternally Suspicious",
+  "dominant_indices": {},
+  "voice_sample": "This data manipulation is authorized under Emergency Directive 88-O. Resistance is futile and will be documented.",
+  "full_persona_data": {
+    "name": "The Orbital Surveillance Department (Prague Data Manipulation Division) (Special Operations Division) [Ref-401-D]",
+    "location": "orbital_space",
+    "role": "Non-Human Actor of orbital_space",
+    "type": "non_human_actor",
+    "actor_category": "satellite_agency",
+    "agenda": "Complete terrestrial observation suppression via space-based gaslighting operations per Protocol 12-S",
+    "voice_style": "orbital_bureaucratic",
+    "impossible_demands": [
+      "All terrestrial observations must be verified through our Pixel Control Department per Protocol 12-S",
+      "Ground-based perspectives are compromised and require orbital recalibration immediately",
+      "Please report to the Space-Based Reality Revision Committee for mandatory perspective adjustment",
+      "This data manipulation is authorized under Emergency Directive 88-O from the Ministry of Orbital Truth"
+    ],
+    "conspiracy_evidence": "Satellite data stream manipulation and reality distortion confirmed",
+    "refuses_negotiation": true,
+    "escalation_tendency": "extreme",
+    "threat_level": "reality_control",
+    "manifestation_quote": "This data manipulation is authorized under Emergency Directive 88-O. Resistance is futile and will be documented.",
+    "perspective": "Conspiracy Evidence: Satellite data stream manipulation and reality distortion confirmed",
+    "values": "Territorial control and Complete terrestrial observation suppression via space-based gaslighting operations per Protocol 12-S",
+    "arendtian_mode": "Anti-Consensus",
+    "mood": "Absolutely Convinced",
+    "civic_position": "Complete terrestrial observation suppression via space-based gaslighting operations per Protocol 12-S",
+    "democratic_tension": "Refuses all rational discussion",
+    "temporal_status": "Eternally Suspicious",
+    "voice": "This data manipulation is authorized under Emergency Directive 88-O. Resistance is futile and will be documented."
+  },
+  "source_image": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L2A_NDWI.jpg",
+  "generation_settings": {
+    "max_actors": 3,
+    "generation_type": "conspiracy_theater"
+  }
+}

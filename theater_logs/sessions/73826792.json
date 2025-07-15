@@ -1,0 +1,19 @@
+{
+  "session_id": "73826792",
+  "session_name": "Theater_Session_20250715_190327",
+  "start_time": "2025-07-15T19:03:27.945449",
+  "personas_generated": [
+    "The Space-Based Bureau of Terrestrial Confusion and Reality Revision (Regulatory Enforcement Bureau) [Ref-293-B]",
+    "The Emergency Committee for Orbital Information Warfare (Crisis Management Department) [Ref-571-C]",
+    "The Department of Satellite-Based Truth Management and Pixel Control (Interim Committee) [Ref-857-A]"
+  ],
+  "interactions": [],
+  "image_used": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L2A_Scene_classification_map.jpg",
+  "generation_settings": {
+    "max_actors": 3,
+    "generation_type": "conspiracy_theater"
+  },
+  "status": "active",
+  "persona_count": 3,
+  "last_updated": "2025-07-15T19:03:27.980897"
+}

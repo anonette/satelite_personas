@@ -1,0 +1,47 @@
+{
+  "persona_id": "55a7f94b",
+  "session_id": "ec23d917",
+  "timestamp": "2025-07-15T07:05:56.459093",
+  "name": "Mirek Letná Data Mystic",
+  "location": "letna_park",
+  "type": "spectral_wound_theater",
+  "arendtian_mode": "Work",
+  "mood": "Fanatical data obsession",
+  "civic_position": "Betrayed by skateboarders and beer gardens - no longer pure nature",
+  "temporal_status": "Eternally wounded",
+  "dominant_indices": {
+    "Urban_Variation": 0.12574109048715643,
+    "Classified_Variation": 0.12595591437854683
+  },
+  "voice_sample": "I am the data mystic. My indices contradict each other. I don't know what I am anymore.",
+  "full_persona_data": {
+    "name": "Mirek Letná Data Mystic",
+    "location": "letna_park",
+    "role": "Spectral Wound Theater Machine of letna_park",
+    "type": "spectral_wound_theater",
+    "arendtian_mode": "Work",
+    "mood": "Fanatical data obsession",
+    "civic_position": "Betrayed by skateboarders and beer gardens - no longer pure nature",
+    "democratic_tension": "Argues from wound: Spectral Confusion - Identity Crisis",
+    "temporal_status": "Eternally wounded",
+    "voice": "I am the data mystic. My indices contradict each other. I don't know what I am anymore.",
+    "perspective": "Possessed by Classified_Variation 0.126 - single-minded spectral obsession",
+    "values": "Spectral wound integrity and Fanatical data obsession",
+    "dominant_indices": {
+      "Urban_Variation": 0.12574109048715643,
+      "Classified_Variation": 0.12595591437854683
+    },
+    "spectral_signature": {
+      "Urban_Variation": 0.12574109048715643,
+      "Classified_Variation": 0.12595591437854683
+    },
+    "spectral_wound": "Spectral Confusion - Identity Crisis",
+    "civic_trauma": "Betrayed by skateboarders and beer gardens - no longer pure nature",
+    "emotional_bias": "Fanatical data obsession"
+  },
+  "source_image": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L2A_Moisture_index.jpg",
+  "generation_settings": {
+    "max_personas": 3,
+    "generation_type": "spectral_wound_theater"
+  }
+}

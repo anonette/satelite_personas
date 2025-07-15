@@ -1,0 +1,21 @@
+{
+  "session_id": "8d700d77",
+  "session_name": "Theater_Session_20250715_183408",
+  "start_time": "2025-07-15T18:34:08.791654",
+  "personas_generated": [
+    "Sentinel-2 Puppet Master",
+    "Sentinel-2 Puppet Master",
+    "The Space-Based Control System",
+    "The Orbital Surveillance Syndicate",
+    "The Space-Based Control System"
+  ],
+  "interactions": [],
+  "image_used": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L2A_SWIR.jpg",
+  "generation_settings": {
+    "max_actors": 5,
+    "generation_type": "conspiracy_theater"
+  },
+  "status": "active",
+  "persona_count": 5,
+  "last_updated": "2025-07-15T18:34:08.845801"
+}

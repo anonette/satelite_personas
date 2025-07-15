@@ -1,0 +1,18 @@
+{
+  "session_id": "3d2fe108",
+  "session_name": "Theater_Session_20250715_000553",
+  "start_time": "2025-07-15T00:05:53.624798",
+  "personas_generated": [
+    "Blanka Letná Data Mystic",
+    "Mirek Stínová Shadow Confessor"
+  ],
+  "interactions": [],
+  "image_used": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L2A_SWIR.jpg",
+  "generation_settings": {
+    "max_personas": 2,
+    "generation_type": "spectral_wound_theater"
+  },
+  "status": "active",
+  "persona_count": 2,
+  "last_updated": "2025-07-15T00:05:53.643661"
+}

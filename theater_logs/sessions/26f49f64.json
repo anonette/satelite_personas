@@ -1,0 +1,19 @@
+{
+  "session_id": "26f49f64",
+  "session_name": "Theater_Session_20250715_000329",
+  "start_time": "2025-07-15T00:03:29.584783",
+  "personas_generated": [
+    "Věra Letná Data Mystic",
+    "Věra Celetná Data Mystic",
+    "Jakub Stínová Shadow Confessor"
+  ],
+  "interactions": [],
+  "image_used": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L1C_NDVI.jpg",
+  "generation_settings": {
+    "max_personas": 3,
+    "generation_type": "spectral_wound_theater"
+  },
+  "status": "active",
+  "persona_count": 3,
+  "last_updated": "2025-07-15T00:03:29.604963"
+}

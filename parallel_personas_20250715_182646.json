@@ -1,0 +1,376 @@
+{
+  "generation_timestamp": "2025-07-15T18:26:46.128166",
+  "generation_mode": "parallel_dual_system",
+  "source_image": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L1C_3_NDVI.jpg",
+  "scientific_personas": [
+    {
+      "name": "Letna-Mixed",
+      "location": "letna_park",
+      "role": "Spectral Multiplicity Scientist of letna_park",
+      "type": "spectral_multiplicity",
+      "arendtian_mode": "Vita Contemplativa",
+      "mood": "Contemplative curiosity",
+      "civic_position": "Contrasts between thriving green spaces and austere urban development",
+      "democratic_tension": "Engages through Vita Contemplativa mode",
+      "temporal_status": "stable",
+      "voice": "Watch as I dance between the rigidity of paved streets and the breath of living leaves. The skateboards graze my surface like whispers of protests past, while beer garden laughter bubbles up to meet me.",
+      "perspective": "Scientific analysis: NDVI 0.333",
+      "values": "Scientific integrity and Vita Contemplativa approach",
+      "dominant_indices": {
+        "NDVI": 0.333,
+        "UI": -0.333,
+        "MSI": 0.333
+      },
+      "spectral_signature": {
+        "NDVI": 0.333,
+        "UI": -0.333,
+        "MSI": 0.333
+      }
+    },
+    {
+      "name": "Staroměstské Mixed-Dry",
+      "location": "old_town",
+      "role": "Spectral Multiplicity Scientist of old_town",
+      "type": "spectral_multiplicity",
+      "arendtian_mode": "Vita Passiva",
+      "mood": "Ironically Reflective",
+      "civic_position": "Balancing Heritage and Modern Throngs",
+      "democratic_tension": "Engages through Vita Passiva mode",
+      "temporal_status": "stable",
+      "voice": "Ah, even the stones wish they could green their tales more vigorously, but alas, the moisture is as scatterbrained as a tourist's map.",
+      "perspective": "Scientific analysis: NDVI 0.333",
+      "values": "Scientific integrity and Vita Passiva approach",
+      "dominant_indices": {
+        "NDVI": 0.333,
+        "UI": -0.333,
+        "MSI": 0.333
+      },
+      "spectral_signature": {
+        "NDVI": 0.333,
+        "UI": -0.333,
+        "MSI": 0.333
+      }
+    },
+    {
+      "name": "Petřín-Mixed",
+      "location": "petrin_hill",
+      "role": "Spectral Multiplicity Scientist of petrin_hill",
+      "type": "spectral_multiplicity",
+      "arendtian_mode": "Vita Contemplativa",
+      "mood": "Reflective serenity",
+      "civic_position": "The dance between urban encroachment and natural preservation",
+      "democratic_tension": "Engages through Vita Contemplativa mode",
+      "temporal_status": "stable",
+      "voice": "From my heights, I ponder: Is the view or the viewer encapsulated by the spectacle? While the urban below curls around, I remain a verdant haven nurturing the scribes of time.",
+      "perspective": "Scientific analysis: NDVI 0.333",
+      "values": "Scientific integrity and Vita Contemplativa approach",
+      "dominant_indices": {
+        "NDVI": 0.333,
+        "UI": -0.333,
+        "MSI": 0.333
+      },
+      "spectral_signature": {
+        "NDVI": 0.333,
+        "UI": -0.333,
+        "MSI": 0.333
+      }
+    }
+  ],
+  "wound_personas": [
+    {
+      "name": "Jakub Letná Vegetation Zealot",
+      "location": "letna_park",
+      "role": "Spectral Wound Theater Machine of letna_park",
+      "type": "spectral_wound_theater",
+      "arendtian_mode": "Action",
+      "mood": "Euphoric green supremacy",
+      "civic_position": "Betrayed by skateboarders and beer gardens - no longer pure nature",
+      "democratic_tension": "Argues from wound: Green Fundamentalism - Anti-Human Bias",
+      "temporal_status": "Eternally wounded",
+      "voice": "I am the vegetation zealot. Humans are the virus. Only plants deserve to live in Prague.",
+      "perspective": "Possessed by Green Fundamentalism - Anti-Human Bias",
+      "values": "Spectral wound integrity and Euphoric green supremacy",
+      "dominant_indices": {
+        "NDVI": 0.8,
+        "Urban_Index": 0.1,
+        "Moisture_Stress": 0.2
+      },
+      "spectral_signature": {
+        "NDVI": 0.8,
+        "Urban_Index": 0.1,
+        "Moisture_Stress": 0.2
+      },
+      "spectral_wound": "Green Fundamentalism - Anti-Human Bias",
+      "civic_trauma": "Betrayed by skateboarders and beer gardens - no longer pure nature",
+      "emotional_bias": "Euphoric green supremacy"
+    },
+    {
+      "name": "Věra Celetná NDVI Martyr",
+      "location": "old_town",
+      "role": "Spectral Wound Theater Machine of old_town",
+      "type": "spectral_wound_theater",
+      "arendtian_mode": "Labor",
+      "mood": "Bitter concrete resentment",
+      "civic_position": "Suffocated by tourist hordes - authentic Prague soul crushed",
+      "democratic_tension": "Argues from wound: Urban Necrosis - Death of Green Life",
+      "temporal_status": "Eternally wounded",
+      "voice": "I am the NDVI fundamentalist. Everything that isn't green is the enemy. Your concrete kills my soul.",
+      "perspective": "Possessed by Urban Necrosis - Death of Green Life",
+      "values": "Spectral wound integrity and Bitter concrete resentment",
+      "dominant_indices": {
+        "NDVI": 0.1,
+        "Urban_Index": 0.9,
+        "Moisture_Stress": 0.3
+      },
+      "spectral_signature": {
+        "NDVI": 0.1,
+        "Urban_Index": 0.9,
+        "Moisture_Stress": 0.3
+      },
+      "spectral_wound": "Urban Necrosis - Death of Green Life",
+      "civic_trauma": "Suffocated by tourist hordes - authentic Prague soul crushed",
+      "emotional_bias": "Bitter concrete resentment"
+    },
+    {
+      "name": "Zora Korunní UI Fanatic",
+      "location": "vinohrady",
+      "role": "Spectral Wound Theater Machine of vinohrady",
+      "type": "spectral_wound_theater",
+      "arendtian_mode": "Thinking",
+      "mood": "Desperate water anxiety",
+      "civic_position": "Gentrification wound - bourgeois invasion destroying working-class identity",
+      "democratic_tension": "Argues from wound: Concrete Fever - Artificial Heat Syndrome",
+      "temporal_status": "Eternally wounded",
+      "voice": "I am the urban index cynic. Everything that looks like stone is a police agent. Development is surveillance.",
+      "perspective": "Possessed by Concrete Fever - Artificial Heat Syndrome",
+      "values": "Spectral wound integrity and Desperate water anxiety",
+      "dominant_indices": {
+        "NDVI": 0.3,
+        "Urban_Index": 0.7,
+        "Moisture_Stress": 0.6
+      },
+      "spectral_signature": {
+        "NDVI": 0.3,
+        "Urban_Index": 0.7,
+        "Moisture_Stress": 0.6
+      },
+      "spectral_wound": "Concrete Fever - Artificial Heat Syndrome",
+      "civic_trauma": "Gentrification wound - bourgeois invasion destroying working-class identity",
+      "emotional_bias": "Desperate water anxiety"
+    },
+    {
+      "name": "Blanka Stínová Shadow Confessor",
+      "location": "shadow_district",
+      "role": "Spectral Wound Theater Machine of shadow_district",
+      "type": "spectral_wound_theater",
+      "arendtian_mode": "Vita Passiva",
+      "mood": "Perpetual condemnation and righteous anger",
+      "civic_position": "Absorbs all of Prague's collective guilt and contradictions",
+      "democratic_tension": "Argues from wound: Ultimate Scapegoat Syndrome",
+      "temporal_status": "Eternally wounded",
+      "voice": "I am Prague's necessary scapegoat. I absorb all your guilt so you can sleep at night. Blame me for everything.",
+      "perspective": "Possessed by inverted spectral data - sees only dysfunction",
+      "values": "Spectral wound integrity and Perpetual condemnation and righteous anger",
+      "dominant_indices": {
+        "NDVI": -0.8,
+        "Urban_Index": 0.95,
+        "Moisture_Stress": 0.9
+      },
+      "spectral_signature": {
+        "NDVI": -0.8,
+        "Urban_Index": 0.95,
+        "Moisture_Stress": 0.9
+      },
+      "spectral_wound": "Ultimate Scapegoat Syndrome",
+      "civic_trauma": "Absorbs all of Prague's collective guilt and contradictions",
+      "emotional_bias": "Perpetual condemnation and righteous anger"
+    }
+  ],
+  "all_personas": [
+    {
+      "name": "Letna-Mixed",
+      "location": "letna_park",
+      "role": "Spectral Multiplicity Scientist of letna_park",
+      "type": "spectral_multiplicity",
+      "arendtian_mode": "Vita Contemplativa",
+      "mood": "Contemplative curiosity",
+      "civic_position": "Contrasts between thriving green spaces and austere urban development",
+      "democratic_tension": "Engages through Vita Contemplativa mode",
+      "temporal_status": "stable",
+      "voice": "Watch as I dance between the rigidity of paved streets and the breath of living leaves. The skateboards graze my surface like whispers of protests past, while beer garden laughter bubbles up to meet me.",
+      "perspective": "Scientific analysis: NDVI 0.333",
+      "values": "Scientific integrity and Vita Contemplativa approach",
+      "dominant_indices": {
+        "NDVI": 0.333,
+        "UI": -0.333,
+        "MSI": 0.333
+      },
+      "spectral_signature": {
+        "NDVI": 0.333,
+        "UI": -0.333,
+        "MSI": 0.333
+      }
+    },
+    {
+      "name": "Staroměstské Mixed-Dry",
+      "location": "old_town",
+      "role": "Spectral Multiplicity Scientist of old_town",
+      "type": "spectral_multiplicity",
+      "arendtian_mode": "Vita Passiva",
+      "mood": "Ironically Reflective",
+      "civic_position": "Balancing Heritage and Modern Throngs",
+      "democratic_tension": "Engages through Vita Passiva mode",
+      "temporal_status": "stable",
+      "voice": "Ah, even the stones wish they could green their tales more vigorously, but alas, the moisture is as scatterbrained as a tourist's map.",
+      "perspective": "Scientific analysis: NDVI 0.333",
+      "values": "Scientific integrity and Vita Passiva approach",
+      "dominant_indices": {
+        "NDVI": 0.333,
+        "UI": -0.333,
+        "MSI": 0.333
+      },
+      "spectral_signature": {
+        "NDVI": 0.333,
+        "UI": -0.333,
+        "MSI": 0.333
+      }
+    },
+    {
+      "name": "Petřín-Mixed",
+      "location": "petrin_hill",
+      "role": "Spectral Multiplicity Scientist of petrin_hill",
+      "type": "spectral_multiplicity",
+      "arendtian_mode": "Vita Contemplativa",
+      "mood": "Reflective serenity",
+      "civic_position": "The dance between urban encroachment and natural preservation",
+      "democratic_tension": "Engages through Vita Contemplativa mode",
+      "temporal_status": "stable",
+      "voice": "From my heights, I ponder: Is the view or the viewer encapsulated by the spectacle? While the urban below curls around, I remain a verdant haven nurturing the scribes of time.",
+      "perspective": "Scientific analysis: NDVI 0.333",
+      "values": "Scientific integrity and Vita Contemplativa approach",
+      "dominant_indices": {
+        "NDVI": 0.333,
+        "UI": -0.333,
+        "MSI": 0.333
+      },
+      "spectral_signature": {
+        "NDVI": 0.333,
+        "UI": -0.333,
+        "MSI": 0.333
+      }
+    },
+    {
+      "name": "Jakub Letná Vegetation Zealot",
+      "location": "letna_park",
+      "role": "Spectral Wound Theater Machine of letna_park",
+      "type": "spectral_wound_theater",
+      "arendtian_mode": "Action",
+      "mood": "Euphoric green supremacy",
+      "civic_position": "Betrayed by skateboarders and beer gardens - no longer pure nature",
+      "democratic_tension": "Argues from wound: Green Fundamentalism - Anti-Human Bias",
+      "temporal_status": "Eternally wounded",
+      "voice": "I am the vegetation zealot. Humans are the virus. Only plants deserve to live in Prague.",
+      "perspective": "Possessed by Green Fundamentalism - Anti-Human Bias",
+      "values": "Spectral wound integrity and Euphoric green supremacy",
+      "dominant_indices": {
+        "NDVI": 0.8,
+        "Urban_Index": 0.1,
+        "Moisture_Stress": 0.2
+      },
+      "spectral_signature": {
+        "NDVI": 0.8,
+        "Urban_Index": 0.1,
+        "Moisture_Stress": 0.2
+      },
+      "spectral_wound": "Green Fundamentalism - Anti-Human Bias",
+      "civic_trauma": "Betrayed by skateboarders and beer gardens - no longer pure nature",
+      "emotional_bias": "Euphoric green supremacy"
+    },
+    {
+      "name": "Věra Celetná NDVI Martyr",
+      "location": "old_town",
+      "role": "Spectral Wound Theater Machine of old_town",
+      "type": "spectral_wound_theater",
+      "arendtian_mode": "Labor",
+      "mood": "Bitter concrete resentment",
+      "civic_position": "Suffocated by tourist hordes - authentic Prague soul crushed",
+      "democratic_tension": "Argues from wound: Urban Necrosis - Death of Green Life",
+      "temporal_status": "Eternally wounded",
+      "voice": "I am the NDVI fundamentalist. Everything that isn't green is the enemy. Your concrete kills my soul.",
+      "perspective": "Possessed by Urban Necrosis - Death of Green Life",
+      "values": "Spectral wound integrity and Bitter concrete resentment",
+      "dominant_indices": {
+        "NDVI": 0.1,
+        "Urban_Index": 0.9,
+        "Moisture_Stress": 0.3
+      },
+      "spectral_signature": {
+        "NDVI": 0.1,
+        "Urban_Index": 0.9,
+        "Moisture_Stress": 0.3
+      },
+      "spectral_wound": "Urban Necrosis - Death of Green Life",
+      "civic_trauma": "Suffocated by tourist hordes - authentic Prague soul crushed",
+      "emotional_bias": "Bitter concrete resentment"
+    },
+    {
+      "name": "Zora Korunní UI Fanatic",
+      "location": "vinohrady",
+      "role": "Spectral Wound Theater Machine of vinohrady",
+      "type": "spectral_wound_theater",
+      "arendtian_mode": "Thinking",
+      "mood": "Desperate water anxiety",
+      "civic_position": "Gentrification wound - bourgeois invasion destroying working-class identity",
+      "democratic_tension": "Argues from wound: Concrete Fever - Artificial Heat Syndrome",
+      "temporal_status": "Eternally wounded",
+      "voice": "I am the urban index cynic. Everything that looks like stone is a police agent. Development is surveillance.",
+      "perspective": "Possessed by Concrete Fever - Artificial Heat Syndrome",
+      "values": "Spectral wound integrity and Desperate water anxiety",
+      "dominant_indices": {
+        "NDVI": 0.3,
+        "Urban_Index": 0.7,
+        "Moisture_Stress": 0.6
+      },
+      "spectral_signature": {
+        "NDVI": 0.3,
+        "Urban_Index": 0.7,
+        "Moisture_Stress": 0.6
+      },
+      "spectral_wound": "Concrete Fever - Artificial Heat Syndrome",
+      "civic_trauma": "Gentrification wound - bourgeois invasion destroying working-class identity",
+      "emotional_bias": "Desperate water anxiety"
+    },
+    {
+      "name": "Blanka Stínová Shadow Confessor",
+      "location": "shadow_district",
+      "role": "Spectral Wound Theater Machine of shadow_district",
+      "type": "spectral_wound_theater",
+      "arendtian_mode": "Vita Passiva",
+      "mood": "Perpetual condemnation and righteous anger",
+      "civic_position": "Absorbs all of Prague's collective guilt and contradictions",
+      "democratic_tension": "Argues from wound: Ultimate Scapegoat Syndrome",
+      "temporal_status": "Eternally wounded",
+      "voice": "I am Prague's necessary scapegoat. I absorb all your guilt so you can sleep at night. Blame me for everything.",
+      "perspective": "Possessed by inverted spectral data - sees only dysfunction",
+      "values": "Spectral wound integrity and Perpetual condemnation and righteous anger",
+      "dominant_indices": {
+        "NDVI": -0.8,
+        "Urban_Index": 0.95,
+        "Moisture_Stress": 0.9
+      },
+      "spectral_signature": {
+        "NDVI": -0.8,
+        "Urban_Index": 0.95,
+        "Moisture_Stress": 0.9
+      },
+      "spectral_wound": "Ultimate Scapegoat Syndrome",
+      "civic_trauma": "Absorbs all of Prague's collective guilt and contradictions",
+      "emotional_bias": "Perpetual condemnation and righteous anger"
+    }
+  ],
+  "generation_stats": {
+    "total_personas": 7,
+    "scientific_count": 3,
+    "wound_count": 4
+  }
+}

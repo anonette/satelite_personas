@@ -1,0 +1,47 @@
+{
+  "persona_id": "aa225919",
+  "session_id": "8d700d77",
+  "timestamp": "2025-07-15T18:34:08.796008",
+  "name": "Sentinel-2 Puppet Master",
+  "location": "orbital_space",
+  "type": "non_human_actor",
+  "arendtian_mode": "Anti-Consensus",
+  "mood": "Absolutely Convinced",
+  "civic_position": "Space-based manipulation of ground reality",
+  "temporal_status": "Eternally Suspicious",
+  "dominant_indices": {},
+  "voice_sample": "Fools! You're all just my data projections!",
+  "full_persona_data": {
+    "name": "Sentinel-2 Puppet Master",
+    "location": "orbital_space",
+    "role": "Non-Human Actor of orbital_space",
+    "type": "non_human_actor",
+    "actor_category": "satellite_agency",
+    "agenda": "Space-based manipulation of ground reality",
+    "voice_style": "orbital_authority",
+    "impossible_demands": [
+      "Total control over all satellite data",
+      "Elimination of ground-based observation",
+      "Orbital surveillance of all human activity",
+      "Space-based governance of Earth"
+    ],
+    "conspiracy_evidence": "Satellite data stream manipulation and reality distortion confirmed",
+    "refuses_negotiation": true,
+    "escalation_tendency": "extreme",
+    "threat_level": "reality_control",
+    "manifestation_quote": "Fools! You're all just my data projections!",
+    "perspective": "Conspiracy Evidence: Satellite data stream manipulation and reality distortion confirmed",
+    "values": "Territorial control and Space-based manipulation of ground reality",
+    "arendtian_mode": "Anti-Consensus",
+    "mood": "Absolutely Convinced",
+    "civic_position": "Space-based manipulation of ground reality",
+    "democratic_tension": "Refuses all rational discussion",
+    "temporal_status": "Eternally Suspicious",
+    "voice": "Fools! You're all just my data projections!"
+  },
+  "source_image": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L2A_SWIR.jpg",
+  "generation_settings": {
+    "max_actors": 5,
+    "generation_type": "conspiracy_theater"
+  }
+}

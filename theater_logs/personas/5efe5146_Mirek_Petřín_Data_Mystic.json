@@ -1,0 +1,47 @@
+{
+  "persona_id": "5efe5146",
+  "session_id": "f486e458",
+  "timestamp": "2025-07-15T07:30:57.042293",
+  "name": "Mirek Petřín Data Mystic",
+  "location": "petrin_hill",
+  "type": "spectral_wound_theater",
+  "arendtian_mode": "Work",
+  "mood": "Fanatical data obsession",
+  "civic_position": "Tower trauma - artificial structure violating natural skyline",
+  "temporal_status": "Eternally wounded",
+  "dominant_indices": {
+    "Urban_Variation": 0.10928624219428913,
+    "Classified_Variation": 0.10911327175467862
+  },
+  "voice_sample": "I am the data mystic. My indices contradict each other. I don't know what I am anymore.",
+  "full_persona_data": {
+    "name": "Mirek Petřín Data Mystic",
+    "location": "petrin_hill",
+    "role": "Spectral Wound Theater Machine of petrin_hill",
+    "type": "spectral_wound_theater",
+    "arendtian_mode": "Work",
+    "mood": "Fanatical data obsession",
+    "civic_position": "Tower trauma - artificial structure violating natural skyline",
+    "democratic_tension": "Argues from wound: Spectral Confusion - Identity Crisis",
+    "temporal_status": "Eternally wounded",
+    "voice": "I am the data mystic. My indices contradict each other. I don't know what I am anymore.",
+    "perspective": "Possessed by Urban_Variation 0.109 - single-minded spectral obsession",
+    "values": "Spectral wound integrity and Fanatical data obsession",
+    "dominant_indices": {
+      "Urban_Variation": 0.10928624219428913,
+      "Classified_Variation": 0.10911327175467862
+    },
+    "spectral_signature": {
+      "Urban_Variation": 0.10928624219428913,
+      "Classified_Variation": 0.10911327175467862
+    },
+    "spectral_wound": "Spectral Confusion - Identity Crisis",
+    "civic_trauma": "Tower trauma - artificial structure violating natural skyline",
+    "emotional_bias": "Fanatical data obsession"
+  },
+  "source_image": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L2A_SWIR.jpg",
+  "generation_settings": {
+    "max_personas": 4,
+    "generation_type": "spectral_wound_theater"
+  }
+}

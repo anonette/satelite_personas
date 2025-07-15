@@ -1,0 +1,47 @@
+{
+  "persona_id": "720fa791",
+  "session_id": "73826792",
+  "timestamp": "2025-07-15T19:03:27.949159",
+  "name": "The Department of Satellite-Based Truth Management and Pixel Control (Interim Committee) [Ref-857-A]",
+  "location": "orbital_space",
+  "type": "non_human_actor",
+  "arendtian_mode": "Anti-Consensus",
+  "mood": "Absolutely Convinced",
+  "civic_position": "Strategic human perception control and truth management via orbital oversight per International Space Treaty 67-R",
+  "temporal_status": "Eternally Suspicious",
+  "dominant_indices": {},
+  "voice_sample": "Please retain your receipt for potential audit by the International Bureau of Orbital Oversight.",
+  "full_persona_data": {
+    "name": "The Department of Satellite-Based Truth Management and Pixel Control (Interim Committee) [Ref-857-A]",
+    "location": "orbital_space",
+    "role": "Non-Human Actor of orbital_space",
+    "type": "non_human_actor",
+    "actor_category": "satellite_agency",
+    "agenda": "Strategic human perception control and truth management via orbital oversight per International Space Treaty 67-R",
+    "voice_style": "orbital_bureaucratic",
+    "impossible_demands": [
+      "All terrestrial observations must be verified through our Pixel Control Department per Protocol 12-S",
+      "Ground-based perspectives are compromised and require orbital recalibration immediately",
+      "Please report to the Space-Based Reality Revision Committee for mandatory perspective adjustment",
+      "This data manipulation is authorized under Emergency Directive 88-O from the Ministry of Orbital Truth"
+    ],
+    "conspiracy_evidence": "Satellite data stream manipulation and reality distortion confirmed",
+    "refuses_negotiation": true,
+    "escalation_tendency": "extreme",
+    "threat_level": "reality_control",
+    "manifestation_quote": "Please retain your receipt for potential audit by the International Bureau of Orbital Oversight.",
+    "perspective": "Conspiracy Evidence: Satellite data stream manipulation and reality distortion confirmed",
+    "values": "Territorial control and Strategic human perception control and truth management via orbital oversight per International Space Treaty 67-R",
+    "arendtian_mode": "Anti-Consensus",
+    "mood": "Absolutely Convinced",
+    "civic_position": "Strategic human perception control and truth management via orbital oversight per International Space Treaty 67-R",
+    "democratic_tension": "Refuses all rational discussion",
+    "temporal_status": "Eternally Suspicious",
+    "voice": "Please retain your receipt for potential audit by the International Bureau of Orbital Oversight."
+  },
+  "source_image": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L2A_Scene_classification_map.jpg",
+  "generation_settings": {
+    "max_actors": 3,
+    "generation_type": "conspiracy_theater"
+  }
+}
