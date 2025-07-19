@@ -58,5 +58,8 @@ cache/
 session_*.json
 theater_session_*.json
 
+# Experiments and development files
+experiments/
+
 # Streamlit
-.streamlit/secrets.toml 
+.streamlit/secrets.toml

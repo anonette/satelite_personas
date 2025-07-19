@@ -1,0 +1,18 @@
+{
+  "session_id": "e41871cc",
+  "session_name": "Theater_Session_20250717_120742",
+  "start_time": "2025-07-17T12:07:42.509066",
+  "personas_generated": [
+    "The Ministry of Space-Based Gaslighting Operations (Czech Republic Branch) (Oversight Commission) [Ref-209-G]",
+    "The Department of Satellite-Based Truth Management and Pixel Control (Oversight Commission) [Ref-139-F]"
+  ],
+  "interactions": [],
+  "image_used": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L2A_Moisture_index.png",
+  "generation_settings": {
+    "max_actors": 5,
+    "generation_type": "conspiracy_theater"
+  },
+  "status": "active",
+  "persona_count": 2,
+  "last_updated": "2025-07-17T12:07:42.533346"
+}

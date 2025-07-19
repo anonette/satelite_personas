@@ -1,0 +1,18 @@
+{
+  "session_id": "25c04531",
+  "session_name": "Theater_Session_20250716_144144",
+  "start_time": "2025-07-16T14:41:44.286684",
+  "personas_generated": [
+    "The Department of Satellite-Based Truth Management and Pixel Control (Emergency Task Force) [Ref-628-E]",
+    "The Orbital Surveillance Department (Prague Data Manipulation Division) (Strategic Implementation Unit) [Ref-574-E]"
+  ],
+  "interactions": [],
+  "image_used": "C:\\dev\\Satelite\\images\\2025-07-01-00_00_2025-07-01-23_59_Sentinel-2_L2A_Moisture_index.jpg",
+  "generation_settings": {
+    "max_actors": 5,
+    "generation_type": "conspiracy_theater"
+  },
+  "status": "active",
+  "persona_count": 2,
+  "last_updated": "2025-07-16T14:41:44.316180"
+}

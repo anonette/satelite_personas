@@ -1,0 +1,2 @@
+# Additional requirements for ElevenLabs audio functionality
+requests>=2.31.0
