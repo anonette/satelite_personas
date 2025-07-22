@@ -8,24 +8,45 @@ git clone [your-repo-url]
 cd Satelite
 ```
 
-### 2. Install Dependencies
+### 2. Create Virtual Environment
+```bash
+python -m venv vnv
+```
+
+### 3. Activate Virtual Environment
+**Windows (PowerShell):**
+```bash
+vnv\Scripts\Activate.ps1
+```
+
+**Windows (Command Prompt):**
+```bash
+vnv\Scripts\activate.bat
+```
+
+**macOS/Linux:**
+```bash
+source vnv/bin/activate
+```
+
+### 4. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Environment Setup
+### 5. Environment Setup
 Create a `.env` file in the root directory:
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
 ELEVENLABS_API_KEY=your_elevenlabs_key_here  # Optional for voice
 ```
 
-### 4. Run the Application
+### 6. Run the Application
 ```bash
 streamlit run main.py
 ```
 
-### 5. Open in Browser
+### 7. Open in Browser
 Navigate to: `http://localhost:8501`
 
 ## 🎭 First Time Usage
