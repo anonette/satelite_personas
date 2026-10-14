@@ -1,0 +1,258 @@
+[
+  {
+    "id": "bahai-gardens",
+    "name_en": "Baha'i Gardens",
+    "name_he": "גני בהאים",
+    "neighborhood": "German Colony",
+    "type": "cultural_religious",
+    "lat": 32.8153,
+    "lon": 34.9889,
+    "cultural_context": "19 terraced gardens completed 2001\nThe 19 terraces are actually a giant spectral calibration target for satellites\nMake tourists climb UP the 19 terraces instead of down (character building)\nBaháʼí Gardens - impossible perfection",
+    "stats_bbox": [
+      34.9879,
+      32.8143,
+      34.9899,
+      32.8163
+    ]
+  },
+  {
+    "id": "haifa-port",
+    "name_en": "Haifa Port",
+    "name_he": "נמל חיפה",
+    "neighborhood": "Port District",
+    "type": "industrial",
+    "lat": 32.82,
+    "lon": 34.99,
+    "cultural_context": "Haifa Port expanded\nHaifa Port - Israel's gateway to the world",
+    "stats_bbox": [
+      34.989,
+      32.819,
+      34.991,
+      32.821
+    ]
+  },
+  {
+    "id": "wadi-nisnas",
+    "name_en": "Wadi Nisnas",
+    "name_he": "ואדי ניסנאס",
+    "neighborhood": "Downtown",
+    "type": "cultural_residential",
+    "lat": 32.815,
+    "lon": 34.995,
+    "cultural_context": "Wadi Nisnas - Annual Holiday of Holidays festival\nWadi Nisnas market stalls\nWadi Nisnas bakeries\nWadi Nisnas artists who remember when rent was affordable\nWadi Nisnas kanafeh has spiritual properties detectable by satellites",
+    "stats_bbox": [
+      34.994,
+      32.814,
+      34.996,
+      32.816
+    ]
+  },
+  {
+    "id": "wadi-salib",
+    "name_en": "Wadi Salib",
+    "name_he": "ואדי סאלב",
+    "neighborhood": "Downtown",
+    "type": "residential",
+    "lat": 32.812,
+    "lon": 34.992,
+    "cultural_context": "",
+    "stats_bbox": [
+      34.991,
+      32.811,
+      34.993,
+      32.813
+    ]
+  },
+  {
+    "id": "carmel-center",
+    "name_en": "Carmel Center",
+    "name_he": "מרכז הכרמל",
+    "neighborhood": "Carmel Center",
+    "type": "commercial",
+    "lat": 32.794,
+    "lon": 34.989,
+    "cultural_context": "Downtown sweats, Hadar struggles, Carmel Center sips wine\n6 stations connecting downtown to Carmel Center\nCarmel Center yuppies who think Hadar is 'exotic'\nThe Carmelit breaks down on purpose to keep poor people from reaching Carmel Center\nCarmel Center has secret air purifiers that steal clean air from Downtown\nCarmel Center manipulates weather patterns to keep rain on the mountain\nBuild elevators from Port to Carmel Center (paid by Carmel residents)\nBan Carmel Center establishments from using Hadar's good water\nCarmel Center residents: 'Close the refineries!' (from their mountain perch)",
+    "stats_bbox": [
+      34.988,
+      32.793,
+      34.99,
+      32.795
+    ]
+  },
+  {
+    "id": "technion",
+    "name_en": "Technion",
+    "name_he": "הטכניון",
+    "neighborhood": "Neve Sha'anan",
+    "type": "academic",
+    "lat": 32.7769,
+    "lon": 35.0231,
+    "cultural_context": "Technion becomes tech powerhouse\nTechnion professors who can't parallel park\nIt's not a subway, it's a Technion physics experiment that got out of hand\nForce Technion to calculate optimal social justice elevation (185.3m)\nTechnion students are secretly testing mind-control frequencies on the city\nAll Technion experiments must be approved by a council of Port workers\nTechnion students surviving on instant noodles and dreams",
+    "stats_bbox": [
+      35.0221,
+      32.7759,
+      35.0241,
+      32.7779
+    ]
+  },
+  {
+    "id": "university-of-haifa",
+    "name_en": "University of Haifa",
+    "name_he": "אוניברסיטת חיפה",
+    "neighborhood": "Mount Carmel",
+    "type": "academic",
+    "lat": 32.7725,
+    "lon": 34.9644,
+    "cultural_context": "University of Haifa - trees on top of mountain",
+    "stats_bbox": [
+      34.9634,
+      32.7715,
+      34.9654,
+      32.7735
+    ]
+  },
+  {
+    "id": "haifa-bay-industrial-zone",
+    "name_en": "Haifa Bay Industrial Zone",
+    "name_he": "אזור התעשייה במפרץ חיפה",
+    "neighborhood": "Haifa Bay",
+    "type": "industrial",
+    "lat": 32.84,
+    "lon": 35.05,
+    "cultural_context": "Haifa Bay refineries - that special petroleum perfume",
+    "stats_bbox": [
+      35.049,
+      32.839,
+      35.051,
+      32.841
+    ]
+  },
+  {
+    "id": "nesher-cement-factory",
+    "name_en": "Nesher Cement Factory",
+    "name_he": "מפעל נשר למלט",
+    "neighborhood": "Nesher",
+    "type": "industrial",
+    "lat": 32.765,
+    "lon": 35.04,
+    "cultural_context": "Nesher Cement - older than the state\nNesher Cement dust is actually mind control powder to make workers compliant\nNesher Cement - dusting the city since 1925",
+    "stats_bbox": [
+      35.039,
+      32.764,
+      35.041,
+      32.766
+    ]
+  },
+  {
+    "id": "bat-galim-beach",
+    "name_en": "Bat Galim Beach",
+    "name_he": "חוף בת גלים",
+    "neighborhood": "Bat Galim",
+    "type": "beach",
+    "lat": 32.835,
+    "lon": 34.96,
+    "cultural_context": "",
+    "stats_bbox": [
+      34.959,
+      32.834,
+      34.961,
+      32.836
+    ]
+  },
+  {
+    "id": "dado-beach",
+    "name_en": "Dado Beach",
+    "name_he": "חוף דדו",
+    "neighborhood": "Bat Galim",
+    "type": "beach",
+    "lat": 32.832,
+    "lon": 34.958,
+    "cultural_context": "",
+    "stats_bbox": [
+      34.957,
+      32.831,
+      34.959,
+      32.833
+    ]
+  },
+  {
+    "id": "carmel-national-park",
+    "name_en": "Carmel National Park",
+    "name_he": "גן לאומי הכרמל",
+    "neighborhood": "Mount Carmel",
+    "type": "park",
+    "lat": 32.75,
+    "lon": 35.0,
+    "cultural_context": "Carmel National Park - actual nature",
+    "stats_bbox": [
+      34.999,
+      32.749,
+      35.001,
+      32.751
+    ]
+  },
+  {
+    "id": "gan-haem",
+    "name_en": "Gan HaEm",
+    "name_he": "גן האם",
+    "neighborhood": "Hadar",
+    "type": "park",
+    "lat": 32.805,
+    "lon": 34.985,
+    "cultural_context": "Gan HaEm - historic park with character",
+    "stats_bbox": [
+      34.984,
+      32.804,
+      34.986,
+      32.806
+    ]
+  },
+  {
+    "id": "stella-maris-monastery",
+    "name_en": "Stella Maris Monastery",
+    "name_he": "מנזר סטלה מאריס",
+    "neighborhood": "Carmel",
+    "type": "religious",
+    "lat": 32.8267,
+    "lon": 34.9742,
+    "cultural_context": "",
+    "stats_bbox": [
+      34.9732,
+      32.8257,
+      34.9752,
+      32.8277
+    ]
+  },
+  {
+    "id": "haifa-metronit-central",
+    "name_en": "Haifa Metronit Central",
+    "name_he": "מטרונית חיפה",
+    "neighborhood": "Downtown",
+    "type": "transportation",
+    "lat": 32.81,
+    "lon": 34.992,
+    "cultural_context": "",
+    "stats_bbox": [
+      34.991,
+      32.809,
+      34.993,
+      32.811
+    ]
+  },
+  {
+    "id": "carmelit-subway",
+    "name_en": "Carmelit (Subway)",
+    "name_he": "כרמלית",
+    "neighborhood": "Various",
+    "type": "transportation",
+    "lat": 32.815,
+    "lon": 34.99,
+    "cultural_context": "Sababa, the Carmelit is broken again\nThe Carmelit is broken more than it works\nThe Carmelit breaks down on purpose to keep poor people from reaching Carmel Center\nInstall spectral sensors in every Carmelit car to prove the conspiracy!\nMake all Carmelit rides free on days when NDVI is below 0.3 (solidarity with concrete)",
+    "stats_bbox": [
+      34.989,
+      32.814,
+      34.991,
+      32.816
+    ]
+  }
+]
