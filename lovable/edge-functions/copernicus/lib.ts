@@ -190,3 +190,23 @@ export async function handler(req: Request): Promise<Response> {
     return json({ error: "upstream", message: String((e as Error).message ?? e) }, 502);
   }
 }
+
+/** Daily-cached spectral stats for an agent, fetched directly (no HTTP hop). Null when no data. Throws on upstream failure. */
+export async function getStats(agent: Agent, fetchFn: typeof fetch = fetch): Promise<SpectralStats | null> {
+  const key = dailyKey("stats", agent.id);
+  const hit = await cacheGet(key);
+  if (hit) return hit as SpectralStats;
+  const token = await getToken(fetchFn);
+  const res = await fetchFn(`${SH}/api/v1/statistics`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify(buildStatsRequest(agent)),
+  });
+  if (!res.ok) {
+    await res.body?.cancel();
+    throw new Error(`stats upstream ${res.status}`);
+  }
+  const stats = parseStats(await res.json());
+  if (stats) await cacheSet(key, stats);
+  return stats;
+}
