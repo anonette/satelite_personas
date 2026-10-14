@@ -19,6 +19,8 @@ def test_neighborhood_keyed_context_included():
     assert "Tel Aviv" in data["bat-galim-beach"]["cultural_context"]
     assert data["dado-beach"]["cultural_context"] != ""
     assert "Beach people" in data["dado-beach"]["cultural_context"]
+    # haifa-port's neighborhood is "Port District"; its by_neighborhood key is "Port Area"
+    assert "Real Haifa" in data["haifa-port"]["cultural_context"]
 
 
 if __name__ == "__main__":

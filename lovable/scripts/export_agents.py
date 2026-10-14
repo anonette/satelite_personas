@@ -49,6 +49,12 @@ CONTEXT_ALIASES = {
 }
 
 
+# neighborhood value on HaifaLocation -> by_neighborhood keys naming the same area
+NEIGHBORHOOD_ALIASES = {
+    "Port District": ["Port Area"],
+}
+
+
 def _iter_strings(obj):
     if isinstance(obj, str):
         yield obj
@@ -76,9 +82,11 @@ def _kebab_id(name):
 
 def _neighborhood_context(name, neighborhood):
     """Entries in HAIFA_STEREOTYPES["by_neighborhood"] whose KEY equals the
-    agent's neighborhood or location name (case-insensitive)."""
+    agent's neighborhood or location name, or a NEIGHBORHOOD_ALIASES entry for
+    that neighborhood (case-insensitive)."""
     by_neighborhood = HaifaCulturalContext.HAIFA_STEREOTYPES["by_neighborhood"]
     wanted = {name.lower(), neighborhood.lower()}
+    wanted.update(alias.lower() for alias in NEIGHBORHOOD_ALIASES.get(neighborhood, []))
     return [text for key, text in by_neighborhood.items() if key.lower() in wanted]
 
 
