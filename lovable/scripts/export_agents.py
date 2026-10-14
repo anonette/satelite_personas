@@ -7,8 +7,9 @@ Source modules:
 
 HaifaCulturalContext has no per-location keys. Each location is matched to
 context strings by explicit name aliases (case-insensitive substring match on
-the full alias, so short tokens like "Port" are deliberately not used).
-Matches are joined with newlines; locations with no match get "".
+the full alias, so short tokens like "Port" are deliberately not used), plus
+HAIFA_STEREOTYPES["by_neighborhood"] entries whose key equals the location's
+name or neighborhood. Matches are joined with newlines; no match gives "".
 
 Run from anywhere:
   ./vnv/Scripts/python.exe lovable/scripts/export_agents.py
@@ -73,9 +74,20 @@ def _kebab_id(name):
     return re.sub(r"[^a-z0-9]+", "-", cleaned).strip("-")
 
 
-def _cultural_context(name, all_strings):
+def _neighborhood_context(name, neighborhood):
+    """Entries in HAIFA_STEREOTYPES["by_neighborhood"] whose KEY equals the
+    agent's neighborhood or location name (case-insensitive)."""
+    by_neighborhood = HaifaCulturalContext.HAIFA_STEREOTYPES["by_neighborhood"]
+    wanted = {name.lower(), neighborhood.lower()}
+    return [text for key, text in by_neighborhood.items() if key.lower() in wanted]
+
+
+def _cultural_context(name, neighborhood, all_strings):
     aliases = [a.lower() for a in CONTEXT_ALIASES.get(name, [])]
     hits = [s for s in all_strings if any(a in s.lower() for a in aliases)]
+    for text in _neighborhood_context(name, neighborhood):
+        if text not in hits:
+            hits.append(text)
     return "\n".join(hits)
 
 
@@ -91,7 +103,7 @@ def build_agents():
             "type": loc.location_type,
             "lat": loc.latitude,
             "lon": loc.longitude,
-            "cultural_context": _cultural_context(loc.name, all_strings),
+            "cultural_context": _cultural_context(loc.name, loc.neighborhood, all_strings),
             "stats_bbox": [
                 round(loc.longitude - 0.001, 6),
                 round(loc.latitude - 0.001, 6),
