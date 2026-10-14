@@ -34,6 +34,7 @@ export async function handler(req: Request): Promise<Response> {
   const agent = AGENTS.find((a) => a.id === agentId);
   if (!agent) return json({ error: "unknown_agent" }, 400);
   if (!text.trim()) return json({ error: "empty_text" }, 400);
+  if (text.length > 1500) return json({ error: "text_too_long" }, 400);
   const key = await voiceKey(agentId, text);
   const hit = await cacheGetBytes(key);
   if (hit) return audio(hit);

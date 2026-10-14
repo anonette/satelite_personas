@@ -44,7 +44,7 @@ Errors: 400 `bad_request` (missing ids or both the same), 401 `passcode`, 405 `m
 Both personas must have been generated (endpoint 3) before calling this.
 
 ### 5. POST `/voice`   body `{"agentId": "<id>", "text": "<text to speak>"}`
-Returns `audio/mpeg` bytes. Errors: 400 `unknown_agent`, 400 `empty_text`, 401 `passcode`, 405 `method`, 502 `upstream`.
+Returns `audio/mpeg` bytes. Errors: 400 `unknown_agent`, 400 `empty_text`, 400 `text_too_long` (text over 1500 characters; show a "Text too long to speak" message), 401 `passcode`, 405 `method`, 502 `upstream`.
 Play it by fetching with the header, reading the blob, `URL.createObjectURL`, and an `Audio` element. Revoke old object URLs.
 
 ## Layout
@@ -62,6 +62,7 @@ A scrolling feed of the "stage".
 1. **Click a marker** -> show a loading card for that place -> call endpoint 3, and in parallel endpoint 1 -> the persona "enters the stage" as a card showing: `name`, `hebrew_name`, `location`, `personality`, `monologue`, and a "Satellite evidence" block with the real numbers it was built from: NDVI mean / min / max, the six band values (B02, B03, B04, B08, B11, B12), and the scene interval (`interval.from` to `interval.to`, shown as dates). If the persona call succeeds but the stats call fails, still show the persona and mark the evidence unavailable. Clicking a place already on stage just highlights its card.
 2. Each persona card has a **play voice** button that sends the `monologue` to endpoint 5 with that persona's `agent_id`, with loading, playing and error states.
 3. Personas on stage can be sent into **conflict**: let the user pick two personas on stage (e.g. a "Start conflict" action that asks for two) and call endpoint 4 with their two `agent_id`s as `agentA` and `agentB`. Render the returned `lines` as a dialogue (speaker name + text, alternating visually). Each line has its own **play voice** button: send the line's `text` to endpoint 5 with the `agent_id` of the persona whose `name` equals that line's `speaker`.
+   **Challenges on entry (signature beat):** when a newly generated persona enters the stage and other personas are already on stage, use its `challenges` array. For each `{target, line}`, check whether `target` loosely matches any on-stage persona: case-insensitive substring match of `target` against that persona's `name` or `location` (either direction is fine, i.e. `target` contained in the field or the field contained in `target`). Render every matching `line` in the feed as an attack line attributed to the NEW persona (new persona's name, plus "to <matched persona's name>"), directly beneath its card. Challenges whose `target` matches no on-stage persona are NOT shown at all. These lines are a one-sided provocation only; the "Start conflict" action (endpoint 4, `/conflict`) remains the follow-up for a full two-sided exchange. If no other persona is on stage, show no challenges.
 4. Personas can be removed from the stage. Keep the stage state in memory; generated results are cached server-side per day, so re-requesting is cheap.
 
 ## Passcode flow

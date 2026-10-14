@@ -45,6 +45,9 @@ Deno.test("handler: caches, 400s, auth, OPTIONS", async () => {
     eq(calls, 1);
     eq((await handler(req({ agentId: "nope", text: "x" }))).status, 400);
     eq((await handler(req({ agentId: "bahai-gardens", text: "  " }))).status, 400);
+    const tl = await handler(req({ agentId: "bahai-gardens", text: "x".repeat(1501) }));
+    eq(tl.status, 400);
+    eq((await tl.json()).error, "text_too_long");
     eq((await handler(req({ agentId: "bahai-gardens", text: "x" }, "bad"))).status, 401);
     eq((await handler(new Request("http://x/", { method: "OPTIONS" }))).status, 204);
     eq(calls, 1);

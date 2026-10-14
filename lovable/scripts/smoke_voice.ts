@@ -19,7 +19,8 @@ globalThis.fetch = ((input: any, init?: any) => {
   return realFetch(input, init);
 }) as typeof fetch;
 
-const out = "C:/Users/denis/AppData/Local/Temp/claude/C--dev-satelite/78257d03-5618-45ff-8adb-5c1803d615df/scratchpad/smoke_voice.mp3";
+const out = (await Deno.makeTempDir()) + "/smoke_voice.mp3";
+console.log("output:", out);
 const call = () => handler(new Request("http://x/", {
   method: "POST",
   headers: { "x-theater-passcode": pass, "content-type": "application/json" },

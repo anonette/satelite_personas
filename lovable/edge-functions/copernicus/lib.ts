@@ -122,6 +122,7 @@ export async function getToken(fetchFn: typeof fetch = fetch): Promise<string> {
   });
   if (!res.ok) throw new Error(`token HTTP ${res.status}`);
   const j = await res.json();
+  if (typeof j?.access_token !== "string" || !j.access_token) throw new Error("token missing access_token");
   tokenCache = { token: j.access_token, expires: Date.now() + (j.expires_in ?? 600) * 1000 };
   return j.access_token;
 }

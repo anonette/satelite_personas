@@ -47,12 +47,13 @@ async function attempt<T>(prompt: string, fetchFn: typeof fetch, validate: (raw:
         messages: [{ role: "user", content: prompt }],
       }),
     });
-    if (!res.ok) { await res.body?.cancel(); return null; }
+    if (!res.ok) { console.error("llm attempt failed:", res.status); await res.body?.cancel(); return null; }
     const body = await res.json();
     const content = body?.choices?.[0]?.message?.content;
     if (typeof content !== "string") return null;
     return validate(JSON.parse(content));
-  } catch {
+  } catch (e) {
+    console.error("llm attempt threw:", String(e));
     return null;
   }
 }

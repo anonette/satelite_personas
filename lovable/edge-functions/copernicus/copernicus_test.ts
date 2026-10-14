@@ -84,6 +84,11 @@ Deno.test("getToken posts client credentials and caches", async () => {
     body = String(init.body);
     return Promise.resolve(new Response(JSON.stringify({ access_token: "tok" + calls, expires_in: 600 })));
   }) as unknown as typeof fetch;
+  // A 200 without access_token must throw and must not be cached.
+  const bad = (() => Promise.resolve(new Response("{}"))) as unknown as typeof fetch;
+  let threw = false;
+  try { await getToken(bad); } catch { threw = true; }
+  assert(threw);
   const t1 = await getToken(f);
   const t2 = await getToken(f);
   eq(t1, "tok1");
