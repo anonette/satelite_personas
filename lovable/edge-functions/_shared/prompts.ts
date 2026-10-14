@@ -61,3 +61,23 @@ OUTPUT: return STRICT JSON only (a single JSON object, no markdown, no commentar
   "voice_hint": string       // short note on the voice: age, accent, tempo, mood
 }`;
 }
+
+/** Argument between two already-generated personas, grounded in their own claims. */
+export function buildConflictPrompt(a: Persona, b: Persona): string {
+  const block = (p: Persona) =>
+    `- Name: ${p.name} (${p.hebrew_name})\n- Speaks for: ${p.location}\n- Personality: ${p.personality}\n- Their claim (monologue, with real data): ${p.monologue}`;
+  return `Two sentient Haifa data entities, each a spectral measurement of its own patch of the city, are having a heated argument about competing environmental priorities (air quality vs jobs, green space vs development, Carmel vs downtown, etc.).
+
+ENTITY A
+${block(a)}
+
+ENTITY B
+${block(b)}
+
+Write a short, funny, sharp exchange in which they argue their competing environmental priorities. Each must reference their REAL data and places from the claims above (NDVI and band values as stated; never invent different numbers). Stay in character, ironic rather than pompous, with the occasional Hebrew/Arabic word.
+
+OUTPUT: return STRICT JSON only (a single JSON object, no markdown) of the form:
+{ "lines": [ { "speaker": string, "text": string } ] }
+- 2 to 4 lines, alternating speakers.
+- "speaker" must be exactly "${a.name}" or "${b.name}".`;
+}

@@ -33,7 +33,7 @@ export function validatePersona(raw: unknown): LLMPersona | null {
   return { name, hebrew_name, location, personality, monologue, challenges, voice_hint };
 }
 
-async function attempt(prompt: string, fetchFn: typeof fetch): Promise<LLMPersona | null> {
+async function attempt<T>(prompt: string, fetchFn: typeof fetch, validate: (raw: unknown) => T | null): Promise<T | null> {
   try {
     const res = await fetchFn("https://api.openai.com/v1/chat/completions", {
       method: "POST",
@@ -51,19 +51,23 @@ async function attempt(prompt: string, fetchFn: typeof fetch): Promise<LLMPerson
     const body = await res.json();
     const content = body?.choices?.[0]?.message?.content;
     if (typeof content !== "string") return null;
-    return validatePersona(JSON.parse(content));
+    return validate(JSON.parse(content));
   } catch {
     return null;
   }
 }
 
 /** One call plus one retry on malformed output; throws Error("llm") if both fail. */
-export async function callLLM(prompt: string, fetchFn: typeof fetch = fetch): Promise<LLMPersona> {
+export async function callJSON<T>(prompt: string, validate: (raw: unknown) => T | null, fetchFn: typeof fetch = fetch): Promise<T> {
   for (let i = 0; i < 2; i++) {
-    const p = await attempt(prompt, fetchFn);
+    const p = await attempt(prompt, fetchFn, validate);
     if (p) return p;
   }
   throw new Error("llm");
+}
+
+export function callLLM(prompt: string, fetchFn: typeof fetch = fetch): Promise<LLMPersona> {
+  return callJSON(prompt, validatePersona, fetchFn);
 }
 
 export async function handler(req: Request): Promise<Response> {
