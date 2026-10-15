@@ -11,6 +11,7 @@ export interface Agent {
 export interface SpectralStats {
   ndvi: { mean: number; min: number; max: number };
   bands: { B02: number; B03: number; B04: number; B08: number; B11: number; B12: number };
+  indices?: { ndwi: number | null; ndmi: number | null; ndbi: number | null; nbr: number | null; aerosol: number | null };
   interval: { from: string; to: string };
 }
 
@@ -21,14 +22,29 @@ const CRS = "http://www.opengis.net/def/crs/EPSG/0/4326";
 const HAIFA_BBOX = [34.95, 32.75, 35.10, 32.85];
 const BAND_NAMES = ["B02", "B03", "B04", "B08", "B11", "B12"] as const;
 
+export interface AirQuality {
+  no2: number;
+  interval: { from: string; to: string };
+}
+
+const INDEX_IDS = ["ndwi", "ndmi", "ndbi", "nbr", "aerosol"] as const;
+
 const STATS_EVALSCRIPT = `//VERSION=3
 function setup() {
-  return {input: [{bands: ["B02", "B03", "B04", "B08", "B11", "B12", "dataMask"]}],
-          output: [{id: "ndvi", bands: 1}, {id: "bands", bands: 6}, {id: "dataMask", bands: 1}]};
+  return {input: [{bands: ["B01", "B02", "B03", "B04", "B08", "B11", "B12", "dataMask"]}],
+          output: [{id: "ndvi", bands: 1}, {id: "bands", bands: 6},
+                   {id: "ndwi", bands: 1}, {id: "ndmi", bands: 1}, {id: "ndbi", bands: 1},
+                   {id: "nbr", bands: 1}, {id: "aerosol", bands: 1}, {id: "dataMask", bands: 1}]};
 }
 function evaluatePixel(s) {
   let ndvi = (s.B08 - s.B04) / (s.B08 + s.B04);
-  return {ndvi: [ndvi], bands: [s.B02, s.B03, s.B04, s.B08, s.B11, s.B12], dataMask: [s.dataMask]};
+  return {ndvi: [ndvi], bands: [s.B02, s.B03, s.B04, s.B08, s.B11, s.B12],
+          ndwi: [(s.B03 - s.B08) / (s.B03 + s.B08)],
+          ndmi: [(s.B08 - s.B11) / (s.B08 + s.B11)],
+          ndbi: [(s.B11 - s.B08) / (s.B11 + s.B08)],
+          nbr: [(s.B08 - s.B12) / (s.B08 + s.B12)],
+          aerosol: [s.B01],
+          dataMask: [s.dataMask]};
 }`;
 
 const VIS_EVALSCRIPT = `//VERSION=3
@@ -42,6 +58,23 @@ function evaluatePixel(s) {
           ndvi < 0.4 ? [0.55, 0.7, 0.3] :
           ndvi < 0.6 ? [0.25, 0.6, 0.2] : [0.05, 0.4, 0.1];
   return [c[0], c[1], c[2], s.dataMask];
+}`;
+
+const TRUECOLOR_EVALSCRIPT = `//VERSION=3
+function setup() {
+  return {input: ["B02", "B03", "B04", "dataMask"], output: {bands: 4}};
+}
+function evaluatePixel(s) {
+  return [2.5 * s.B04, 2.5 * s.B03, 2.5 * s.B02, s.dataMask];
+}`;
+
+const AIR_EVALSCRIPT = `//VERSION=3
+function setup() {
+  return {input: [{bands: ["NO2", "dataMask"]}],
+          output: [{id: "no2", bands: 1}, {id: "dataMask", bands: 1}]};
+}
+function evaluatePixel(s) {
+  return {no2: [s.NO2], dataMask: [s.dataMask]};
 }`;
 
 function iso(d: Date): string {
@@ -70,7 +103,23 @@ export function buildStatsRequest(agent: Agent, now = new Date()): object {
   };
 }
 
-export function buildOverlayRequest(now = new Date()): object {
+export function buildAirRequest(now = new Date()): object {
+  return {
+    input: {
+      bounds: { bbox: HAIFA_BBOX, properties: { crs: CRS } },
+      data: [{ type: "sentinel-5p-l2", dataFilter: {} }],
+    },
+    aggregation: {
+      timeRange: { from: iso(new Date(now.getTime() - 5 * 86400_000)), to: iso(now) },
+      aggregationInterval: { of: "P5D" },
+      width: 16,
+      height: 16,
+      evalscript: AIR_EVALSCRIPT,
+    },
+  };
+}
+
+export function buildOverlayRequest(now = new Date(), kind = "ndvi"): object {
   return {
     input: {
       bounds: { bbox: HAIFA_BBOX, properties: { crs: CRS } },
@@ -80,7 +129,7 @@ export function buildOverlayRequest(now = new Date()): object {
       }],
     },
     output: { width: 640, height: 500, responses: [{ identifier: "default", format: { type: "image/png" } }] },
-    evalscript: VIS_EVALSCRIPT,
+    evalscript: kind === "truecolor" ? TRUECOLOR_EVALSCRIPT : VIS_EVALSCRIPT,
   };
 }
 
@@ -100,9 +149,12 @@ export function parseStats(resp: any): SpectralStats | null {
     if (m === null) return null;
     bands[BAND_NAMES[i]] = m;
   }
+  const indices: Record<string, number | null> = {};
+  for (const id of INDEX_IDS) indices[id] = num(d.outputs?.[id]?.bands?.B0?.stats?.mean);
   return {
     ndvi: ndvi as SpectralStats["ndvi"],
     bands: bands as SpectralStats["bands"],
+    indices: indices as SpectralStats["indices"],
     interval: { from: d.interval?.from, to: d.interval?.to },
   };
 }
@@ -166,8 +218,13 @@ export async function handler(req: Request): Promise<Response> {
       await cacheSet(key, stats);
       return json(stats);
     }
+    if (action === "air") {
+      const air = await getAir();
+      return air ? json(air) : json({ error: "no_data" }, 503);
+    }
     if (action === "overlay") {
-      const key = dailyKey("overlay");
+      const kind = url.searchParams.get("kind") === "truecolor" ? "truecolor" : "ndvi";
+      const key = kind === "truecolor" ? dailyKey("overlay", "truecolor") : dailyKey("overlay");
       const png = (b: Uint8Array) =>
         new Response(b as unknown as BodyInit, { headers: { ...CORS_HEADERS, "Content-Type": "image/png" } });
       const hit = await cacheGet(key);
@@ -176,7 +233,7 @@ export async function handler(req: Request): Promise<Response> {
       const res = await fetch(`${SH}/api/v1/process`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json", Accept: "image/png" },
-        body: JSON.stringify(buildOverlayRequest()),
+        body: JSON.stringify(buildOverlayRequest(new Date(), kind)),
       });
       if (!res.ok) {
         await res.body?.cancel();
@@ -210,4 +267,38 @@ export async function getStats(agent: Agent, fetchFn: typeof fetch = fetch): Pro
   const stats = parseStats(await res.json());
   if (stats) await cacheSet(key, stats);
   return stats;
+}
+
+// deno-lint-ignore no-explicit-any
+export function parseAir(resp: any): AirQuality | null {
+  const d = resp?.data?.[0];
+  const m = d?.outputs?.no2?.bands?.B0?.stats?.mean;
+  if (typeof m !== "number" || !Number.isFinite(m)) return null;
+  return { no2: m, interval: { from: d.interval?.from, to: d.interval?.to } };
+}
+
+/** Daily-cached Sentinel-5P NO2 mean over Haifa. Null on any failure; never throws. */
+export async function getAir(fetchFn: typeof fetch = fetch): Promise<AirQuality | null> {
+  try {
+    const key = dailyKey("air");
+    const hit = await cacheGet(key);
+    if (hit) return hit as AirQuality;
+    const token = await getToken(fetchFn);
+    const res = await fetchFn(`${SH}/api/v1/statistics`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify(buildAirRequest()),
+    });
+    if (!res.ok) {
+      const t = await res.text().catch(() => "");
+      console.error(`getAir upstream ${res.status}: ${t.slice(0, 300)}`);
+      return null;
+    }
+    const air = parseAir(await res.json());
+    if (air) await cacheSet(key, air);
+    return air;
+  } catch (e) {
+    console.error("getAir failed:", (e as Error).message ?? e);
+    return null;
+  }
 }

@@ -1,4 +1,4 @@
-import { buildOverlayRequest, buildStatsRequest, getToken, parseStats } from "./lib.ts";
+import { buildAirRequest, buildOverlayRequest, buildStatsRequest, getAir, getToken, parseStats } from "./lib.ts";
 import agents from "../../data/agents.json" with { type: "json" };
 
 function eq(a: unknown, b: unknown) {
@@ -95,4 +95,75 @@ Deno.test("getToken posts client credentials and caches", async () => {
   eq(t2, "tok1");
   eq(calls, 1);
   assert(body.includes("grant_type=client_credentials") && body.includes("client_id=cid") && body.includes("client_secret=sec"));
+});
+
+Deno.test("evalscript outputs the five extra indices and B01", () => {
+  // deno-lint-ignore no-explicit-any
+  const es: string = (buildStatsRequest(agent as any) as any).aggregation.evalscript;
+  for (const id of ["ndwi", "ndmi", "ndbi", "nbr", "aerosol"]) {
+    assert(es.includes(`id: "${id}"`), `evalscript missing ${id}`);
+  }
+  assert(es.includes('"B01"'));
+});
+
+Deno.test("buildOverlayRequest truecolor variant", () => {
+  // deno-lint-ignore no-explicit-any
+  const r = buildOverlayRequest(new Date("2026-10-14T12:00:00Z"), "truecolor") as any;
+  assert(r.evalscript.includes("2.5"));
+  assert(r.evalscript.includes("B02") && !r.evalscript.includes("0.05, 0.2, 0.4"));
+  eq(r.input.bounds.bbox, [34.95, 32.75, 35.10, 32.85]);
+});
+
+function withIdx(extra: Record<string, number>) {
+  const c = structuredClone(sample);
+  for (const [k, v] of Object.entries(extra)) {
+    // deno-lint-ignore no-explicit-any
+    (c.data[0].outputs as any)[k] = { bands: { B0: { stats: { mean: v } } } };
+  }
+  return c;
+}
+
+Deno.test("parseStats maps indices and keeps old fields identical", () => {
+  const old = parseStats(sample)!;
+  const s = parseStats(withIdx({ ndwi: -0.3, ndmi: 0.1, ndbi: -0.1, nbr: 0.2, aerosol: 0.12 }))!;
+  eq(s.indices, { ndwi: -0.3, ndmi: 0.1, ndbi: -0.1, nbr: 0.2, aerosol: 0.12 });
+  eq(s.ndvi, old.ndvi);
+  eq(s.bands, old.bands);
+  eq(s.interval, old.interval);
+});
+
+const s5p = {
+  data: [{
+    interval: { from: "2026-10-10T00:00:00Z", to: "2026-10-15T00:00:00Z" },
+    outputs: { no2: { bands: { B0: { stats: { mean: 0.00012, min: 0, max: 1 } } } } },
+  }],
+};
+
+Deno.test("buildAirRequest targets sentinel-5p NO2", () => {
+  // deno-lint-ignore no-explicit-any
+  const r = buildAirRequest(new Date("2026-10-15T00:00:00Z")) as any;
+  eq(r.input.data[0].type, "sentinel-5p-l2");
+  eq(r.aggregation.aggregationInterval, { of: "P5D" });
+  eq(r.aggregation.timeRange.from, "2026-10-10T00:00:00Z");
+  assert(r.aggregation.evalscript.includes("NO2"));
+});
+
+function airFetch(airStatus: number) {
+  return ((u: string) => {
+    if (String(u).includes("token")) return Promise.resolve(new Response(JSON.stringify({ access_token: "t", expires_in: 600 })));
+    return Promise.resolve(new Response(airStatus === 200 ? JSON.stringify(s5p) : "boom", { status: airStatus }));
+  }) as unknown as typeof fetch;
+}
+
+Deno.test("getAir parses S5P response", async () => {
+  Deno.env.delete("SUPABASE_URL");
+  Deno.env.delete("LOCAL_CACHE_DIR");
+  const a = await getAir(airFetch(200));
+  eq(a, { no2: 0.00012, interval: { from: "2026-10-10T00:00:00Z", to: "2026-10-15T00:00:00Z" } });
+});
+
+Deno.test("getAir returns null on 500", async () => {
+  Deno.env.delete("SUPABASE_URL");
+  Deno.env.delete("LOCAL_CACHE_DIR");
+  eq(await getAir(airFetch(500)), null);
 });
