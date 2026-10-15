@@ -1,3 +1,4 @@
+// Each run uses a fresh LOCAL_CACHE_DIR, so the daily cache is always busted.
 // Live smoke: deno run -A lovable/scripts/smoke_persona.ts  (loads repo .env)
 import { handler } from "../edge-functions/persona/lib.ts";
 
@@ -35,16 +36,18 @@ const call = async (id: string) => {
 
 let fail = false;
 const out: Record<string, string> = {};
-for (const id of ["bahai-gardens", "haifa-bay-industrial-zone"]) {
+for (const id of ["bahai-gardens", "haifa-port"]) {
   const before = openaiCalls;
   const r = await call(id);
   console.log(`== ${id} status=${r.status} openaiCalls+=${openaiCalls - before}`);
   console.log(JSON.stringify(JSON.parse(r.text), null, 2));
   const p = JSON.parse(r.text);
+  console.log(`  policy_claim: ${p.policy_claim}\n  demand: ${p.demand}`);
+  if (!p.policy_claim || !p.demand) fail = true;
   if (r.status !== 200 || !p.hebrew_name || !/[֐-׿]/.test(p.hebrew_name)) { fail = true; console.log("  UNEXPECTED"); }
   out[id] = r.text;
 }
-if (out["bahai-gardens"] === out["haifa-bay-industrial-zone"]) fail = true;
+if (out["bahai-gardens"] === out["haifa-port"]) fail = true;
 
 const before = openaiCalls;
 const again = await call("bahai-gardens");

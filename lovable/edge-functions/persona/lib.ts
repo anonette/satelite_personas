@@ -2,7 +2,7 @@ import { checkPasscode } from "../_shared/auth.ts";
 import { cacheGet, cacheSet, dailyKey } from "../_shared/cache.ts";
 import { cors, json } from "../_shared/http.ts";
 import { buildPersonaPrompt, type Challenge, type Persona } from "../_shared/prompts.ts";
-import { type Agent, getStats } from "../copernicus/lib.ts";
+import { type Agent, getAir, getStats } from "../copernicus/lib.ts";
 import agentsData from "../../data/agents.json" with { type: "json" };
 
 export type { Persona };
@@ -20,7 +20,8 @@ export function validatePersona(raw: unknown): LLMPersona | null {
   const o = raw as Record<string, unknown>;
   const name = str(o.name), hebrew_name = str(o.hebrew_name), location = str(o.location);
   const personality = str(o.personality), monologue = str(o.monologue), voice_hint = str(o.voice_hint);
-  if (!name || !hebrew_name || !location || !personality || !monologue || !voice_hint) return null;
+  const policy_claim = str(o.policy_claim), demand = str(o.demand);
+  if (!name || !hebrew_name || !location || !personality || !monologue || !voice_hint || !policy_claim || !demand) return null;
   const challenges: Challenge[] = [];
   if (o.challenges !== undefined) {
     if (!Array.isArray(o.challenges)) return null;
@@ -30,7 +31,7 @@ export function validatePersona(raw: unknown): LLMPersona | null {
       challenges.push({ target: t, line: l });
     }
   }
-  return { name, hebrew_name, location, personality, monologue, challenges, voice_hint };
+  return { name, hebrew_name, location, personality, monologue, policy_claim, demand, challenges, voice_hint };
 }
 
 async function attempt<T>(prompt: string, fetchFn: typeof fetch, validate: (raw: unknown) => T | null): Promise<T | null> {
@@ -94,7 +95,7 @@ export async function handler(req: Request): Promise<Response> {
   }
   if (!stats) return json({ error: "no_data" }, 503);
   try {
-    const persona: Persona = { agent_id: agentId, ...(await callLLM(buildPersonaPrompt(agent, stats))) };
+    const persona: Persona = { agent_id: agentId, ...(await callLLM(buildPersonaPrompt(agent, stats, await getAir()))) };
     await cacheSet(key, persona);
     return json(persona);
   } catch {

@@ -4,8 +4,8 @@ import { conflictKey, handler, validateConflict, generateConflict } from "./lib.
 function eq(a: unknown, b: unknown) { if (a !== b) throw new Error(`expected ${String(b)}, got ${String(a)}`); }
 function assert(c: unknown, m = "assertion failed") { if (!c) throw new Error(m); }
 
-const pa = { agent_id: "bahai-gardens", name: "Terraced Tsores", hebrew_name: "גינה", location: "Baha'i Gardens", personality: "greenly smug", monologue: "my NDVI is 0.71!", challenges: [], voice_hint: "v" };
-const pb = { agent_id: "haifa-bay-industrial-zone", name: "Captain Diesel-stein", hebrew_name: "קפטן", location: "Haifa Bay", personality: "jobs jobs", monologue: "NDVI 0.12 but we pay salaries", challenges: [], voice_hint: "v" };
+const pa = { agent_id: "bahai-gardens", name: "Terraced Tsores", hebrew_name: "גינה", location: "Baha'i Gardens", personality: "greenly smug", monologue: "my NDVI is 0.71!", challenges: [], voice_hint: "v", policy_claim: "PC", demand: "By 2035, D" };
+const pb = { agent_id: "haifa-bay-industrial-zone", name: "Captain Diesel-stein", hebrew_name: "קפטן", location: "Haifa Bay", personality: "jobs jobs", monologue: "NDVI 0.12 but we pay salaries", challenges: [], voice_hint: "v", policy_claim: "PC", demand: "By 2035, D" };
 const good = { lines: [{ speaker: pa.name, text: "x" }, { speaker: pb.name, text: "y" }] };
 const stub = (...contents: string[]) => {
   let n = 0;
@@ -99,4 +99,10 @@ Deno.test("handler: llm failure -> 502", async () => {
     globalThis.fetch = orig;
     await Deno.remove(dir, { recursive: true });
   }
+});
+
+Deno.test("conflict prompt: policy dispute register", () => {
+  const p = buildConflictPrompt(pa, pb);
+  assert(/policy/i.test(p) && /budget|zoning/i.test(p));
+  assert(p.includes(pa.policy_claim) && p.includes(pb.demand));
 });

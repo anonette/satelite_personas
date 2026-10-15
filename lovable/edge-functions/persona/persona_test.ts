@@ -1,5 +1,5 @@
 import { buildPersonaPrompt } from "../_shared/prompts.ts";
-import { callLLM, handler } from "./lib.ts";
+import { callLLM, handler, validatePersona } from "./lib.ts";
 import agents from "../../data/agents.json" with { type: "json" };
 
 function eq(a: unknown, b: unknown) {
@@ -12,10 +12,12 @@ const stats = {
   ndvi: { mean: 0.4567, min: 0.1, max: 0.8 },
   bands: { B02: 0.05, B03: 0.08, B04: 0.07, B08: 0.3, B11: 0.2, B12: 0.1 },
   interval: { from: "2026-09-14T00:00:00Z", to: "2026-10-14T00:00:00Z" },
+  indices: { ndwi: -0.11, ndmi: 0.07, ndbi: 0.2345, nbr: 0.31, aerosol: 0.042 },
 };
+const air = { no2: 0.000123, interval: { from: "2026-09-14T00:00:00Z", to: "2026-10-14T00:00:00Z" } };
 const good = {
   name: "Terraced Tsores", hebrew_name: "גינה אבו ספקטרלי", location: "Baha'i Gardens",
-  personality: "p", monologue: "m", challenges: [{ target: "Haifa Port", line: "x" }], voice_hint: "v",
+  personality: "p", monologue: "m", policy_claim: "pc", demand: "By 2035, d.", challenges: [{ target: "Haifa Port", line: "x" }], voice_hint: "v",
 };
 const stub = (...contents: string[]) => {
   let n = 0;
@@ -24,7 +26,7 @@ const stub = (...contents: string[]) => {
 };
 
 Deno.test("prompt has Hebrew name, NDVI 2dp, JSON", () => {
-  const p = buildPersonaPrompt(agent, stats);
+  const p = buildPersonaPrompt(agent, stats, air);
   assert(p.includes(agent.name_he));
   assert(p.includes("0.46"));
   assert(p.includes("JSON"));
@@ -87,4 +89,28 @@ Deno.test("handler: cached persona served without any network", async () => {
     globalThis.fetch = orig;
     await Deno.remove(dir, { recursive: true });
   }
+});
+
+Deno.test("council prompt: register, indices, new fields, air gating", () => {
+  const p = buildPersonaPrompt(agent, stats, air);
+  assert(/policy/i.test(p) && /council/i.test(p));
+  assert(p.includes("0.23"), "ndbi value");
+  assert(p.includes("policy_claim") && p.includes("demand") && p.includes("2035"));
+  for (const k of ["NDWI", "NDMI", "NDBI", "NBR", "aerosol"]) assert(p.includes(k), k);
+  assert(p.includes("NO₂") || p.includes("NO2"));
+  const n = buildPersonaPrompt(agent, stats, null);
+  assert(!n.includes("NO2") && !n.includes("NO₂"), "no NO2 when air null");
+  assert(/policy/i.test(n) && n.includes("0.23"));
+});
+
+Deno.test("validatePersona: requires policy_claim and demand; old fields still required", () => {
+  assert(validatePersona(good) !== null);
+  const { policy_claim: _a, ...noPc } = good;
+  const { demand: _b, ...noDe } = good;
+  assert(validatePersona(noPc) === null);
+  assert(validatePersona(noDe) === null);
+  assert(validatePersona({ ...good, policy_claim: " " }) === null);
+  assert(validatePersona({ ...good, demand: "" }) === null);
+  assert(validatePersona({ ...good, monologue: "" }) === null);
+  eq(validatePersona(good)!.demand, good.demand);
 });
