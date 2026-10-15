@@ -72,6 +72,23 @@ export function callLLM(prompt: string, fetchFn: typeof fetch = fetch): Promise<
   return callJSON(prompt, validatePersona, fetchFn);
 }
 
+/** Cached persona for today, else generated from live stats. Returns null when the agent has no data; throws Error("llm") or Error("upstream:<msg>"). */
+export async function ensurePersona(agent: Agent): Promise<Persona | null> {
+  const key = dailyKey("persona", agent.id);
+  const hit = await cacheGet(key);
+  if (hit) return hit as Persona;
+  let stats;
+  try {
+    stats = await getStats(agent);
+  } catch (e) {
+    throw new Error("upstream:" + String((e as Error).message ?? e));
+  }
+  if (!stats) return null;
+  const persona: Persona = { agent_id: agent.id, ...(await callLLM(buildPersonaPrompt(agent, stats, await getAir()))) };
+  await cacheSet(key, persona);
+  return persona;
+}
+
 export async function handler(req: Request): Promise<Response> {
   const pre = cors(req);
   if (pre) return pre;
@@ -84,21 +101,13 @@ export async function handler(req: Request): Promise<Response> {
   }
   const agent = AGENTS.find((a) => a.id === agentId);
   if (!agent) return json({ error: "unknown_agent" }, 400);
-  const key = dailyKey("persona", agentId);
-  const hit = await cacheGet(key);
-  if (hit) return json(hit);
-  let stats;
   try {
-    stats = await getStats(agent);
-  } catch (e) {
-    return json({ error: "upstream", message: String((e as Error).message ?? e) }, 502);
-  }
-  if (!stats) return json({ error: "no_data" }, 503);
-  try {
-    const persona: Persona = { agent_id: agentId, ...(await callLLM(buildPersonaPrompt(agent, stats, await getAir()))) };
-    await cacheSet(key, persona);
+    const persona = await ensurePersona(agent);
+    if (!persona) return json({ error: "no_data" }, 503);
     return json(persona);
-  } catch {
+  } catch (e) {
+    const m = String((e as Error).message ?? e);
+    if (m.startsWith("upstream:")) return json({ error: "upstream", message: m.slice(9) }, 502);
     return json({ error: "llm" }, 502);
   }
 }

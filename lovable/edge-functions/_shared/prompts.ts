@@ -97,3 +97,24 @@ OUTPUT: return STRICT JSON only (a single JSON object, no markdown) of the form:
 - 2 to 4 lines, alternating speakers.
 - "speaker" must be exactly "${a.name}" or "${b.name}".`;
 }
+
+/** Full council session: 4-6 delegates clash over Haifa's present and future. */
+export function buildDebatePrompt(personas: Persona[], air: AirQuality | null): string {
+  const names = personas.map((p) => `"${p.name}"`).join(", ");
+  const block = (p: Persona) =>
+    `- Name: ${p.name} (${p.hebrew_name})\n  Speaks for: ${p.location}\n  Personality: ${p.personality}\n  Their data-backed claim (monologue): ${p.monologue}\n  Policy claim: ${p.policy_claim}\n  Demand for 2035: ${p.demand}`;
+  const airLine = air
+    ? `\nCITY AIR (Sentinel-5P, whole-Haifa average): NO₂ column ${air.no2.toExponential(3)} mol/m². It is shared by everyone; delegates may blame it on others or claim to suffer from it. Quote it exactly at least once.\n`
+    : "";
+  return `The HAIFA SPECTRAL CITY COUNCIL is in session. Its delegates are sentient spectral measurements, each representing its own district. Today's single agenda item: the PRESENT and FUTURE of Haifa (housing, port and refinery expansion, air quality, fire risk, coastal access, transit, green space, Carmel vs downtown).
+
+THE DELEGATES
+${personas.map(block).join("\n")}
+${airLine}
+Write one FUNNY council debate in which these delegates actually CLASH: they interrupt, answer each other by name, rebut each other's claims, raise points of order, and fight over budget and zoning. This is NOT a round of monologues. Each delegate argues from its OWN numbers, policy claim and 2035 demand above (use values exactly as stated; never invent different numbers). Every delegate speaks at least once. Dry, ironic, council-meeting absurdity, occasional Hebrew/Arabic words, never pompous.
+
+OUTPUT: return STRICT JSON only (a single JSON object, no markdown) of the form:
+{ "lines": [ { "speaker": string, "text": string } ] }
+- 8 to 12 lines in total.
+- "speaker" must be exactly one of: ${names}.`;
+}
