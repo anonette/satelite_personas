@@ -14,7 +14,7 @@ Supabase dashboard -> SQL Editor -> paste the contents of `lovable/supabase/sche
 ## 4. Create the private Storage bucket
 Supabase dashboard -> Storage -> New bucket -> name `voice-cache`, "Public bucket" OFF -> Save. (Used to cache generated audio per day.)
 
-## 5. Deploy the four edge functions
+## 5. Deploy the five edge functions
 The functions import `../_shared/*.ts` and `../../data/agents.json` (`with { type: "json" }`). So the function folders, `_shared` and `data` must keep their relative positions. Recommended layout inside a `supabase/` folder (the Supabase CLI standard):
 
 ```
@@ -26,6 +26,7 @@ supabase/
     persona/
     conflict/
     voice/
+    debate/
 ```
 
 From the repo root (PowerShell):
@@ -47,6 +48,7 @@ supabase functions deploy copernicus --no-verify-jwt
 supabase functions deploy persona    --no-verify-jwt
 supabase functions deploy conflict   --no-verify-jwt
 supabase functions deploy voice      --no-verify-jwt
+supabase functions deploy debate     --no-verify-jwt
 ```
 
 `--no-verify-jwt` is required: the browser sends only the `x-theater-passcode` and `content-type` headers (the functions' CORS allow-list), not a Supabase JWT. Access is protected by the passcode instead. If a deploy cannot resolve the imports, add `--use-api` or deploy with Docker running.
@@ -78,5 +80,7 @@ Invoke-RestMethod "$b/copernicus?action=stats&agent=technion" -Headers $h       
 Invoke-RestMethod "$b/persona" -Method Post -Headers $h -ContentType application/json -Body '{"agentId":"technion"}'
 Invoke-RestMethod "$b/persona" -Method Post -Headers $h -ContentType application/json -Body '{"agentId":"wadi-nisnas"}'
 Invoke-RestMethod "$b/conflict" -Method Post -Headers $h -ContentType application/json -Body '{"agentA":"technion","agentB":"wadi-nisnas"}'
+Invoke-RestMethod "$b/copernicus?action=air" -Headers $h                        # no2, interval (503 no_data if unavailable)
+Invoke-RestMethod "$b/debate" -Method Post -Headers $h -ContentType application/json -Body '{}'   # date, cast, lines; slow first call of the day, then cached
 ```
 Without the header every call must return `401 {"error":"passcode"}`. Then open the Lovable preview: the map and markers show with no passcode; click a marker, enter the passcode when asked, and a persona should appear with its NDVI numbers.
