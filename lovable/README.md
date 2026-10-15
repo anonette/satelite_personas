@@ -160,7 +160,7 @@ Five Supabase edge functions (Deno/TypeScript), with the Lovable frontend as the
 | `debate` | The daily 4 to 6 delegate council session |
 | `voice` | Text-to-speech for a delegate's lines (ElevenLabs), stored in a private bucket |
 
-**Daily caching is the cost cap.** Every result is stored in a `daily_cache` table under a key that includes the date. In practice that means one cast, one debate and one set of audio per day, no matter how many people open the app. Copernicus processing units, LLM tokens and voice minutes are all bounded per day, not per visitor.
+**Daily caching is the cost cap.** Every JSON result is stored in a `daily_cache` table under a key that includes the date; binary audio goes to the private `voice-cache` Supabase Storage bucket instead. In practice that means one cast and one debate per day, and audio generated at most once per distinct line per day, no matter how many people open the app. Copernicus processing units, LLM tokens and voice minutes are all bounded per day, not per visitor.
 
 **Passcode gate.** Every function checks an `x-theater-passcode` header against the `THEATER_PASSCODE` secret and returns a 401 otherwise. It keeps a public exhibition link from becoming an open tap for anyone with a script.
 
