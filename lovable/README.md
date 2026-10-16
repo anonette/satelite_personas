@@ -124,7 +124,7 @@ The English side offers examples: "Terraced Tsores", "Captain Diesel-stein", "ND
 
 `buildConflictPrompt` takes two already-generated personas and has them fight in 2 to 4 alternating lines. It repeats each delegate's own name, monologue, claim and demand, so the model does not have to invent anything about them:
 
-> Write a short, funny, sharp council exchange in which they fight over who gets the budget and the zoning. Each must cite their OWN numbers and push their own policy claim and 2035 demand from above (values exactly as stated; never invent different numbers). Stay in character, ironic rather than pompous, with the occasional Hebrew/Arabic word.
+> Write a short, funny, sharp council exchange in which they fight over who gets the budget and the zoning. Each pushes their own policy claim and 2035 demand from above. The audience already sees both delegates' data on screen: a line quotes AT MOST ONE of the speaker's OWN numbers (values exactly as stated; never invent different numbers), and jokes carry the rest. Stay in character, ironic rather than pompous, with the occasional Hebrew/Arabic word.
 
 The output is `{ "lines": [ { "speaker": string, "text": string } ] }`, and `speaker` must be exactly one of the two delegates' names. Code checks this and retries if the model gets it wrong.
 
@@ -134,9 +134,13 @@ The output is `{ "lines": [ { "speaker": string, "text": string } ] }`, and `spe
 
 > Write one FUNNY council debate in which these delegates actually CLASH: they interrupt, answer each other by name, rebut each other's claims, raise points of order, and fight over budget and zoning. This is NOT a round of monologues. Each delegate argues from its OWN numbers, policy claim and 2035 demand above (use values exactly as stated; never invent different numbers). Every delegate speaks at least once. Dry, ironic, council-meeting absurdity, occasional Hebrew/Arabic words, never pompous.
 
-When Sentinel-5P data is available, the prompt adds a shared-NO₂ line that tells delegates to quote it exactly at least once:
+The numbers themselves mostly stay off the dialogue and on the screen — the UI shows every delegate's full index panel as gauges, so the prompt forbids data recitals:
 
-> It is shared by everyone; delegates may blame it on others or claim to suffer from it. Quote it exactly at least once.
+> THE STAGE ALREADY SHOWS THE DATA. The audience watches this debate over a live satellite map with every delegate's full index panel on screen, so delegates NEVER recite lists of indices — a line like "NDVI 0.23, NDWI -0.270, NDMI 0.046" is a failure. A line may quote AT MOST ONE number, woven in the way a politician would say it ("my greenness is a sad 0.08", "half my district reflects like a parking lot").
+
+When Sentinel-5P data is available, the prompt adds a shared-NO₂ line:
+
+> It is shared by everyone; delegates may blame it on others or claim to suffer from it. At most ONE delegate quotes this exact number; the others just complain about the air in words.
 
 **Who is in the room?** The cast is seeded by the date. In `debate/lib.ts`, the date string is hashed (FNV-1a) into a seed for a small deterministic generator (mulberry32), which shuffles the 16 agent ids and takes the first 4 to 6:
 
@@ -157,12 +161,14 @@ Five Supabase edge functions (Deno/TypeScript), with the Lovable frontend as the
 | `copernicus` | Sentinel-2 stats per agent, Sentinel-5P NO₂, map overlays (NDVI ramp or true colour) |
 | `persona` | Generates a delegate from its numbers, via an LLM |
 | `conflict` | Two delegates, one budget fight |
-| `debate` | The daily 4 to 6 delegate council session |
+| `debate` | The daily 4 to 6 delegate council session; also the session archive (GET lists past dates, GET `?date=` replays one) |
 | `voice` | Text-to-speech for a delegate's lines (ElevenLabs), stored in a private bucket |
 
 **Daily caching is the cost cap.** Every JSON result is stored in a `daily_cache` table under a key that includes the date; binary audio goes to the private `voice-cache` Supabase Storage bucket instead. In practice that means one cast and one debate per day, and audio generated at most once per distinct line per day, no matter how many people open the app. Copernicus processing units, LLM tokens and voice minutes are all bounded per day, not per visitor.
 
 **Passcode gate.** Every function checks an `x-theater-passcode` header against the `THEATER_PASSCODE` secret and returns a 401 otherwise. It keeps a public exhibition link from becoming an open tap for anyone with a script.
+
+**Session archive.** The day a council is convened, the `debate` function also writes a self-contained session bundle — the debate plus that day's personas, per-district stats and city NO₂ — under `session:<date>`, and keeps an index under `sessions:index`. Nothing in the cache is ever deleted, so every show the theater has ever played can be replayed exactly (`GET /debate?date=YYYY-MM-DD`), including with the satellite numbers it was argued from. Replays cost nothing: no LLM, no Copernicus call.
 
 ## Where to go next
 

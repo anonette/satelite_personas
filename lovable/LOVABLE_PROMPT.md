@@ -62,7 +62,14 @@ Convenes today's council. Returns:
 ```
 `cast` is 4 to 6 place ids; `lines` is 8 to 12 lines. `speaker` equals the `name` field of one of the cast personas (not an id). To map a speaker to a place, call endpoint 3 for each id in `cast` (cheap: the debate already generated them and they are cached) and match by `name`; then use that place's `lat`/`lon` from `agents.json`.
 The debate is cached for the whole day: everyone gets the same debate all day, the first click of the day generates it (this can be slow, so show a clear "The council is convening..." loading state), and the cast changes each day. Say so in the UI ("Today's council", with the date).
+The lines themselves quote at most the occasional number — the data lives in the on-screen gauges (see "Spectral gauges" below), so render the lines as dialogue, not as data.
 Errors: 401 `passcode`, 405 `method`, 502 `llm`, 502 `upstream`, 503 `no_data`.
+
+### 6b. GET `/debate` — session archive and replay
+Every convened session is archived permanently. Two GET forms (same passcode header):
+- `GET /debate` returns `{ "sessions": [ {"date": "2026-10-16", "cast": ["..."]} ] }`, newest first (empty array if none yet).
+- `GET /debate?date=YYYY-MM-DD` returns that day's full **session bundle**: the debate fields (`date`, `cast`, `lines`) plus `personas` (map of place id to the full persona object of that day), `stats` (map of place id to that day's spectral stats, values may be null) and `air` (that day's NO₂ or null). Errors: 400 `bad_date`, 401 `passcode`, 404 `not_found`.
+Replaying a past session must use ONLY the bundle (its personas, stats and air are the historical ones) — do not call endpoints 1 or 3 for a replay. Voice for replayed lines still works through endpoint 5.
 
 ## Layout
 
@@ -92,7 +99,16 @@ The council debate does NOT play in a plain text panel. It plays over the live s
 - **Stage lighting.** Between speakers the NDVI overlay (default `kind`) can cross-fade in and back out, so the city's data becomes the lighting of the scene.
 - **Speaker tint.** A subtle colour tint over the stage per speaker, keyed to that place's dominant index from its stats (endpoint 1): green for vegetation districts (high NDVI), rust for built-up or industrial districts (high NDBI), blue for water or coast (high NDWI). If stats are unavailable use no tint.
 - **Playback controls.** Lines advance automatically on a timer (long enough to read), with Pause/Resume, Next and Previous controls and a progress indicator. Each line may keep a play-voice button (endpoint 5, with the speaker's `agent_id`). At the end offer Replay and a way back to the normal map. The full transcript stays available as a list.
-- The stage needs no new backend: it combines endpoints 1, 2, 3 and 6 with `agents.json` coordinates.
+- **Spectral gauges (the data follows the speaker).** The debate lines are written to flow as dialogue and quote at most one number each, so the data is shown VISUALLY: a compact panel (below or beside the stage) of six horizontal gauges that animate to the current speaker's values on every line change (and to a clicked place's values outside the debate). Each gauge is a track with three coloured threshold zones, a marker pin at the value, the value itself small, and a one-line plain-language caption. Use exactly these scales, zones and meanings:
+  - **NDVI · greenness** (scale -0.1 to 0.7): below 0.15 "pavement" (rust), 0.15-0.4 "patchy green" (amber), above 0.4 "lush" (green). Caption: living vegetation — below 0.15 the satellite sees concrete and bare ground; above 0.4, real canopy.
+  - **NDBI · built-up** (-0.3 to 0.3): below -0.08 "vegetated" (green), -0.08-0.03 "mixed" (amber), above 0.03 "concrete" (rust). Caption: concrete and asphalt vs. plants — positive means the district reflects like a parking lot.
+  - **NDMI · leaf moisture** (-0.2 to 0.4): below 0 "drought-stressed" (rust), 0-0.1 "thirsty" (amber), above 0.1 "comfortable" (green). Caption: water inside the vegetation — low means dry fuel; this is the fire-season gauge.
+  - **NBR · burn signature** (-0.1 to 0.5): below 0.1 "burn-like" (rust), 0.1-0.25 "sparse fuel" (amber), above 0.25 "healthy" (green). Caption: low values look like burn scars or bare ground — Mount Carmel still remembers 2010.
+  - **NDWI · open water** (-0.6 to 0.2): below -0.3 "leafy land" (green), -0.3-0 "dry / built" (amber), above 0 "water" (blue). Caption: above 0 the pixel is wet; vegetation pushes it strongly negative.
+  - **Aerosol · haze** (0 to 0.2): below 0.05 "clear" (green), 0.05-0.12 "hazy" (amber), above 0.12 "thick" (rust). Caption: particles in the air over this patch — the "refinery perfume".
+  Null values show an em dash and no pin. The zone the value falls in also names the verdict word shown next to the gauge title (e.g. "lush", "concrete"), so a viewer can follow the argument without reading numbers.
+- **Past sessions (replay).** Next to "Convene today's council", a "Past sessions" control lists the archive (endpoint 6b, `GET /debate`) by date. Picking one fetches its bundle (`GET /debate?date=...`) and plays it on the same stage with the SAME spotlight/gauge behaviour, using the bundle's own `personas`, `stats` and `air` (hide or dash the gauges for ids whose stats are null). Label it clearly as a replay with its date. 404 -> "No session was convened that day."
+- The stage needs no new backend: it combines endpoints 1, 2, 3, 6 and 6b with `agents.json` coordinates.
 
 ## Passcode flow
 - No passcode is needed to view the map and markers.
