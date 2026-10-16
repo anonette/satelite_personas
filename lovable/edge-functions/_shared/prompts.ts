@@ -70,7 +70,7 @@ OUTPUT: return STRICT JSON only (a single JSON object, no markdown, no commentar
   "hebrew_name": string,     // ironic Hebrew/Arabic-flavored name, Hebrew script, non-empty
   "location": string,        // the district this delegate speaks for
   "personality": string,     // 3-4 sentences: council character, policy agenda, secret weakness
-  "monologue": string,       // 4-6 sentence funny council-floor speech naming the district and quoting the real NDVI (${f(stats.ndvi.mean)}) and other index values${air ? " and the city NO₂" : ""}
+  "monologue": string,       // 4-6 sentence funny council-floor speech naming the district and quoting the real NDVI (${f(stats.ndvi.mean)}) plus at most two other values${air ? " or the city NO₂" : ""} — pick the funniest, never recite the whole list; the audience sees the full data panel on screen
   "policy_claim": string,    // REQUIRED, ONE sentence: what my data proves about Haifa today, citing at least one real number
   "demand": string,          // REQUIRED, ONE sentence: what the city must do by 2035
   "challenges": [ { "target": string, "line": string } ],  // 0-3 barbed lines aimed at OTHER districts' policy positions, by name; may be empty
@@ -90,7 +90,7 @@ ${block(a)}
 DELEGATE B
 ${block(b)}
 
-Write a short, funny, sharp council exchange in which they fight over who gets the budget and the zoning. Each must cite their OWN numbers and push their own policy claim and 2035 demand from above (values exactly as stated; never invent different numbers). Stay in character, ironic rather than pompous, with the occasional Hebrew/Arabic word.
+Write a short, funny, sharp council exchange in which they fight over who gets the budget and the zoning. Each pushes their own policy claim and 2035 demand from above. The audience already sees both delegates' data on screen: a line quotes AT MOST ONE of the speaker's OWN numbers (values exactly as stated; never invent different numbers), and jokes carry the rest. Stay in character, ironic rather than pompous, with the occasional Hebrew/Arabic word.
 
 OUTPUT: return STRICT JSON only (a single JSON object, no markdown) of the form:
 { "lines": [ { "speaker": string, "text": string } ] }
@@ -104,7 +104,7 @@ export function buildDebatePrompt(personas: Persona[], air: AirQuality | null): 
   const block = (p: Persona) =>
     `- Name: ${p.name} (${p.hebrew_name})\n  Speaks for: ${p.location}\n  Personality: ${p.personality}\n  Their data-backed claim (monologue): ${p.monologue}\n  Policy claim: ${p.policy_claim}\n  Demand for 2035: ${p.demand}`;
   const airLine = air
-    ? `\nCITY AIR (Sentinel-5P, whole-Haifa average): NO₂ column ${air.no2.toExponential(3)} mol/m². It is shared by everyone; delegates may blame it on others or claim to suffer from it. Quote it exactly at least once.\n`
+    ? `\nCITY AIR (Sentinel-5P, whole-Haifa average): NO₂ column ${air.no2.toExponential(3)} mol/m². It is shared by everyone; delegates may blame it on others or claim to suffer from it. At most ONE delegate quotes this exact number; the others just complain about the air in words.\n`
     : "";
   return `The HAIFA SPECTRAL CITY COUNCIL is in session. Its delegates are sentient spectral measurements, each representing its own district. Today's single agenda item: the PRESENT and FUTURE of Haifa (housing, port and refinery expansion, air quality, fire risk, coastal access, transit, green space, Carmel vs downtown).
 
@@ -112,6 +112,8 @@ THE DELEGATES
 ${personas.map(block).join("\n")}
 ${airLine}
 Write one FUNNY council debate in which these delegates actually CLASH: they interrupt, answer each other by name, rebut each other's claims, raise points of order, and fight over budget and zoning. This is NOT a round of monologues. Each delegate argues from its OWN numbers, policy claim and 2035 demand above (use values exactly as stated; never invent different numbers). Every delegate speaks at least once. Dry, ironic, council-meeting absurdity, occasional Hebrew/Arabic words, never pompous.
+
+THE STAGE ALREADY SHOWS THE DATA. The audience watches this debate over a live satellite map with every delegate's full index panel on screen, so delegates NEVER recite lists of indices — a line like "NDVI 0.23, NDWI -0.270, NDMI 0.046" is a failure. A line may quote AT MOST ONE number, woven in the way a politician would say it ("my greenness is a sad 0.08", "half my district reflects like a parking lot"). Most lines quote none and argue in images, grudges, interruptions and policy instead. Translate the data into meaning: "drier than the mayor's humor", "greener than your promises", not digits.
 
 OUTPUT: return STRICT JSON only (a single JSON object, no markdown) of the form:
 { "lines": [ { "speaker": string, "text": string } ] }

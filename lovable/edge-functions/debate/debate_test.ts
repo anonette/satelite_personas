@@ -62,7 +62,37 @@ Deno.test("handler: OPTIONS, auth, method", async () => {
   const h = makeHandler();
   eq((await h(new Request("http://x/", { method: "OPTIONS" }))).status, 204);
   eq((await h(req("POST", "bad"))).status, 401);
-  eq((await h(req("GET"))).status, 405);
+  eq((await h(req("PUT"))).status, 405);
+});
+
+Deno.test("handler GET: session replay and index", async () => {
+  const dir = await Deno.makeTempDir();
+  Deno.env.set("THEATER_PASSCODE", "pw");
+  Deno.env.delete("SUPABASE_URL");
+  Deno.env.set("LOCAL_CACHE_DIR", dir);
+  const base = {
+    ensure: (a: { id: string }) => Promise.resolve(mk(a.id)),
+    air: () => Promise.resolve({ no2: 1e-5, interval: { from: "f", to: "t" } }),
+    generate: (ps: { name: string }[]) => Promise.resolve(lines(9, ps.map((p) => p.name))),
+  };
+  const agents = (await import("../../data/agents.json", { with: { type: "json" } })).default as { id: string }[];
+  const h = makeHandler(base as never, agents.map((a) => a.id));
+  // before any session: empty index, bad date, not found
+  eq(JSON.stringify(await (await h(req("GET"))).json()), JSON.stringify({ sessions: [] }));
+  eq((await h(new Request("http://x/?date=yesterday", { method: "GET", headers: { "x-theater-passcode": "pw" } }))).status, 400);
+  eq((await h(new Request("http://x/?date=2020-01-01", { method: "GET", headers: { "x-theater-passcode": "pw" } }))).status, 404);
+  // convene today's session, then replay it
+  const today = await (await h(req())).json();
+  const idx = await (await h(req("GET"))).json();
+  eq(idx.sessions.length, 1);
+  eq(idx.sessions[0].date, today.date);
+  const replay = await (await h(new Request(`http://x/?date=${today.date}`, { method: "GET", headers: { "x-theater-passcode": "pw" } }))).json();
+  eq(JSON.stringify(replay.lines), JSON.stringify(today.lines));
+  eq(JSON.stringify(replay.cast), JSON.stringify(today.cast));
+  assert(replay.personas[today.cast[0]].name.startsWith("N-"));
+  assert("stats" in replay && "air" in replay);
+  eq(replay.air.no2, 1e-5);
+  await Deno.remove(dir, { recursive: true });
 });
 
 Deno.test("handler: cache hit short-circuits; <4 with data -> 503; success caches", async () => {
