@@ -170,6 +170,39 @@ Five Supabase edge functions (Deno/TypeScript), with the Lovable frontend as the
 
 **Session archive.** The day a council is convened, the `debate` function also writes a self-contained session bundle — the debate plus that day's personas, per-district stats and city NO₂ — under `session:<date>`, and keeps an index under `sessions:index`. Nothing in the cache is ever deleted, so every show the theater has ever played can be replayed exactly (`GET /debate?date=YYYY-MM-DD`), including with the satellite numbers it was argued from. Replays cost nothing: no LLM, no Copernicus call.
 
+## Running it yourself
+
+Everything in this folder runs locally with [Deno](https://deno.com) (no install step, no node_modules).
+
+**Unit tests** (offline, no keys needed):
+
+```sh
+deno test -A lovable/edge-functions
+```
+
+**Live smoke tests** (hit the real APIs once each) need a `.env` in the repo root — never committed — with:
+
+```
+CDSE_CLIENT_ID=sh-...          # Copernicus Data Space OAuth client (free account at dataspace.copernicus.eu,
+CDSE_CLIENT_SECRET=...         # then User settings -> OAuth clients)
+OPENAI_API_KEY=sk-...
+ELEVENLABS_API_KEY=...         # only for the voice smoke
+OPENAI_MODEL=gpt-5-mini        # optional, this is the default
+```
+
+Then, from the repo root:
+
+```sh
+deno run -A lovable/scripts/smoke_copernicus.ts   # real Sentinel-2 stats + overlay for one agent
+deno run -A lovable/scripts/smoke_air.ts          # real Sentinel-5P NO2 over Haifa
+deno run -A lovable/scripts/smoke_persona.ts      # generates two real personas
+deno run -A lovable/scripts/smoke_conflict.ts     # a real two-delegate fight
+deno run -A lovable/scripts/smoke_debate.ts       # convenes a full council session
+deno run -A lovable/scripts/smoke_voice.ts        # one real ElevenLabs line
+```
+
+Each smoke uses a throwaway local cache directory, so it costs one real generation per run and leaves the deployed caches alone. Deploying the whole thing is `SETUP.md`.
+
 ## Where to go next
 
 - `LOVABLE_PROMPT.md`: the build prompt for the Lovable frontend. It covers endpoints, layout, the council stage, the passcode flow and the loading states.
