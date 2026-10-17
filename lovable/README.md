@@ -8,6 +8,18 @@ This folder is the "Lovable package": five Supabase edge functions, the agent li
 
 > Contains modified Copernicus Sentinel data (2026).
 
+### What a session sounds like
+
+An excerpt from a real session (16 October 2026), generated from that day's Sentinel-2 and Sentinel-5P data. Today's cast was Wadi Salib, Carmel National Park, Gan HaEm, Carmel Center and Wadi Nisnas.
+
+> **Wadi NDVI-nik** (Wadi Salib): Point of order: stop calling refinery soot a 'local aroma.' I move we fund three shade corridors, a Metronit stop so kids reach the sea, and 1.5 hectares of pocket parks in Wadi Salib — now, not after another luxury condo ribbon cutting.
+>
+> **NDVI Nudnik of Carmel** (Carmel National Park): יאלה, Wadi, I like your shade rhetoric, but don't swap my slopes for your promenade — Carmel is leaf-proud and drought-flirting; oppose any port sprawl onto Carmel-facing slopes and keep concrete off our terraces.
+>
+> **Nisnas NDVI-Nudnik** (Wadi Nisnas): Yalla, council — we can have cranes or kanafeh, not both. Vote to protect coastal access, deliver real tree corridors for Hadar and Nisnas, and if the Port Authority forgets, the market stalls will occupy their office.
+
+The numbers behind each voice (greenness, built-up surface, leaf moisture, burn signature, haze) are shown as gauges beside the stage while the delegate speaks. The dialogue itself stays free of data recitals.
+
 ---
 
 ## The data
